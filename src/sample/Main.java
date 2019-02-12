@@ -6,19 +6,39 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Vector;
+
+public class Main extends Application implements Observer {
+    public Jeu jeu;
+    public Rectangle[][] rectGrid;
+    public Text score;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Jeu jeu; 
         jeu = new Jeu();
 
         primaryStage.setTitle("Pac Man");
 
         Group root = new Group();
+
+        rectGrid = new Rectangle[Grille.LARGEUR][Grille.HAUTEUR];
+
+        for (int i = 0 ; i < Grille.LARGEUR ; i++) {
+            for (int j = 0 ; j < Grille.HAUTEUR ; j++) {
+                rectGrid[i][j] = new Rectangle();
+                rectGrid[i][j].setX(20*j);
+                rectGrid[i][j].setY(20*i+40);
+                rectGrid[i][j].setWidth(20);
+                rectGrid[i][j].setHeight(20);
+                root.getChildren().add(rectGrid[i][j]);
+            }
+        }
 
         Text consigne = new Text();
         consigne.setText("Touche pour deplacer Pac-man :\n" +
@@ -29,8 +49,7 @@ public class Main extends Application {
         consigne.setX(800);
         consigne.setY(40);
 
-        Text score = new Text();
-        score.setText("Score : "+jeu.score);
+        score = new Text();
         score.setX(800);
         score.setY(20);
 
@@ -38,10 +57,7 @@ public class Main extends Application {
 
         TextField txt = new TextField();
 
-
         root.getChildren().add(txt);
-
-        jeu.grid.affichage(root);
 
         EventHandler<KeyEvent> keyEventHander = new EventHandler<KeyEvent>() {
             @Override
@@ -59,9 +75,6 @@ public class Main extends Application {
                     case "q": jeu.pacman.d = Direction.gauche;
                         break;
                 }
-                jeu.pacman.deplacer(jeu);
-                jeu.grid.affichage(root);
-                score.setText("Score : "+jeu.score);
                 txt.clear();
             }
         };
@@ -71,11 +84,21 @@ public class Main extends Application {
         root.getChildren().add(consigne);
 
         primaryStage.setScene(new Scene(root, 1000, 800));
+
         primaryStage.show();
 
+        jeu.addObserver(this);
+
+        new Thread(jeu).start();
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        score.setText("Score : "+jeu.score);
+        jeu.grid.affichage(rectGrid);
     }
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 }
