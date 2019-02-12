@@ -1,5 +1,5 @@
 package librairie;
 
-public class grille {
+public class Grid {
 
 }
