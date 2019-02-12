@@ -16,7 +16,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Jeu jeu = new Jeu();
+        Jeu jeu; 
+        jeu = new Jeu();
 
         primaryStage.setTitle("Pac Man");
 
