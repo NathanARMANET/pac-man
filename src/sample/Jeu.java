@@ -12,6 +12,7 @@ public class Jeu extends Observable implements Runnable{
     public Jeu() {
         grid = new Grille();
         pacman = new Entitee(1, 1, 3, false);
+        pacman.d = Direction.bas;
         grid.grille[1][1] = pacman.value;
         //fantome = new Entitee(3, 1, 4, true);
         score = 0;
@@ -26,7 +27,7 @@ public class Jeu extends Observable implements Runnable{
         try {
             while (true) {
                 pacman.deplacer(this);
-                fantome.deplacer(this);
+                //fantome.deplacer(this);
                 setChanged();
                 notifyObservers();
                 Thread.sleep(1000);

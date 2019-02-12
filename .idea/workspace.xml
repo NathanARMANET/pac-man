@@ -2,45 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9e8c0fcd-886d-4743-aa8d-02344521dba9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/Console.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/Direction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/Entitee.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/Grille.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/Jeu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/.idea/description.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/out/production/pac-man/sample/Console.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/out/production/pac-man/sample/Controller.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/out/production/pac-man/sample/Direction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/out/production/pac-man/sample/Entitee.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/out/production/pac-man/sample/Grille.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/out/production/pac-man/sample/Jeu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/out/production/pac-man/sample/Main$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/out/production/pac-man/sample/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/out/production/pac-man/sample/sample.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/out/production/pac-man/sample/test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/pac-man.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/src/sample/Console.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/src/sample/Controller.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/src/sample/Direction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/src/sample/Entitee.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/src/sample/Grille.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/src/sample/Jeu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/src/sample/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/src/sample/sample.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pac-man/src/sample/test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.out/production/pac-man/sample/Jeu.class" beforeDir="false" afterPath="$PROJECT_DIR$/.out/production/pac-man/sample/Jeu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.out/production/pac-man/sample/Main$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/.out/production/pac-man/sample/Main$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.out/production/pac-man/sample/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/.out/production/pac-man/sample/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Jeu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Jeu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -57,13 +23,49 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="21" selection-start-line="21" selection-end-line="21" />
+            <state relative-caret-position="555">
+              <caret line="91" lean-forward="true" selection-start-line="91" selection-end-line="91" />
+              <folding>
+                <element signature="e#2392#2393#0" expanded="true" />
+                <element signature="e#2420#2421#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/Console.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="26" column="27" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/Jeu.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="29" column="18" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/Direction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>11</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -72,6 +74,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/.idea/misc.xml" />
+        <option value="$PROJECT_DIR$/src/sample/Jeu.java" />
+        <option value="$PROJECT_DIR$/src/sample/Main.java" />
       </list>
     </option>
   </component>
@@ -97,22 +101,6 @@
             <path>
               <item name="pac-man" type="b2602c69:ProjectViewProjectNode" />
               <item name="pac-man" type="462c0819:PsiDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pac-man" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pac-man" type="462c0819:PsiDirectoryNode" />
-              <item name=".out" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pac-man" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pac-man" type="462c0819:PsiDirectoryNode" />
-              <item name=".out" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pac-man" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pac-man" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -132,7 +120,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549986437576" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549987718820" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
@@ -211,15 +199,15 @@
       <window_info id="UI Designer" />
       <window_info id="Capture Tool" />
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24969475" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24969475" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" weight="0.32914287" />
-      <window_info anchor="bottom" id="Messages" visible="true" weight="0.32914287" />
+      <window_info anchor="bottom" id="Messages" weight="0.32914287" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.20914286" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -261,24 +249,35 @@
     <entry file="file://$PROJECT_DIR$/.idea/encodings.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Console.java">
+    <entry file="file://$PROJECT_DIR$/src/sample/Direction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        <state relative-caret-position="30">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Jeu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        <state relative-caret-position="405">
+          <caret line="29" column="18" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Console.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="26" column="27" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        <state relative-caret-position="555">
+          <caret line="91" lean-forward="true" selection-start-line="91" selection-end-line="91" />
+          <folding>
+            <element signature="e#2392#2393#0" expanded="true" />
+            <element signature="e#2420#2421#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

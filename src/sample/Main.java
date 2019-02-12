@@ -9,6 +9,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.Observable;
+import java.util.Observer;
+
 public class Main extends Application {
 
     @Override
@@ -36,7 +39,6 @@ public class Main extends Application {
         root.getChildren().add(score);
 
         TextField txt = new TextField();
-
 
         root.getChildren().add(txt);
 
@@ -70,11 +72,20 @@ public class Main extends Application {
         root.getChildren().add(consigne);
 
         primaryStage.setScene(new Scene(root, 1000, 800));
+
+        jeu.addObserver(new Observer() {
+            @Override
+            public void update(Observable o, Object arg) {
+                jeu.grid.affichage(root);
+                primaryStage.show();
+            }
+        });
+
         primaryStage.show();
 
     }
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 }
