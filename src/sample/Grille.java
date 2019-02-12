@@ -82,14 +82,11 @@ public class Grille {
         return txt;
     }
 
-    public void affichage(Group root) {
-        Vector<Rectangle> rectanglevector = new Vector<>();
-        Rectangle rec;
+    public void affichage(Rectangle[][] tabRect) {
         Color color;
 
         for (int i = 0 ; i < LARGEUR ; i++) {
             for (int j = 0 ; j < HAUTEUR ; j++) {
-                rec = new Rectangle(20*j, 20*i+40, 20, 20);
                 switch (grille[i][j]) {
                     case 0:
                         color = Color.grayRgb(204);
@@ -120,9 +117,7 @@ public class Grille {
                         break;
                 }
 
-                rec.setFill(color);
-                rectanglevector.add(rec);
-                root.getChildren().add(rec);
+                tabRect[i][j].setFill(color);
             }
         }
     }
