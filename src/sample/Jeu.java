@@ -1,10 +1,6 @@
 package sample;
 
-import javafx.scene.Group;
-import javafx.scene.text.Text;
 import java.util.Observable;
-
-import static java.awt.event.KeyEvent.*;
 
 public class Jeu extends Observable implements Runnable{
 
