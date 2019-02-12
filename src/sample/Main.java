@@ -55,7 +55,7 @@ public class Main extends Application implements Observer {
 
         root.getChildren().add(score);
 
-        TextField txt = new TextField();
+        final TextField txt = new TextField();
 
         root.getChildren().add(txt);
 
