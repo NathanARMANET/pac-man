@@ -18,6 +18,7 @@ public class Main extends Application implements Observer {
     public Jeu jeu;
     public Rectangle[][] rectGrid;
     public Text score;
+    public Text life;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -54,6 +55,12 @@ public class Main extends Application implements Observer {
         score.setY(20);
 
         root.getChildren().add(score);
+
+        life = new Text();
+        life.setX(900);
+        life.setY(20);
+
+        root.getChildren().add(life);
 
         TextField txt = new TextField();
 
@@ -95,6 +102,7 @@ public class Main extends Application implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         score.setText("Score : "+jeu.score);
+        life.setText("Life : "+jeu.life);
         jeu.grid.affichage(rectGrid);
     }
 

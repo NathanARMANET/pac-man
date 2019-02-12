@@ -8,13 +8,14 @@ public class Jeu extends Observable implements Runnable{
     public Entitee pacman;
     public Entitee fantome;
     public int score;
+    public int life = 3;
 
     public Jeu() {
         grid = new Grille();
         pacman = new Entitee(1, 1, 3, false);
         pacman.d = Direction.bas;
         grid.grille[1][1] = pacman.value;
-        //fantome = new Entitee(3, 1, 4, true);
+        fantome = new Entitee(5, 1, 4, true);
         score = 0;
     }
 
@@ -24,10 +25,12 @@ public class Jeu extends Observable implements Runnable{
 
     @Override
     public void run() {
+        fantome.d = Direction.bas;
+        fantome.deplacer(this);
+        fantome.d = Direction.immobile;
         try {
-            while (true) {
+            while (life>0) {
                 pacman.deplacer(this);
-                //fantome.deplacer(this);
                 setChanged();
                 notifyObservers();
                 Thread.sleep(1000);
