@@ -19,7 +19,7 @@ public class Console implements Observer {
     }
 
     public static void main(String[] args) {
-        Jeu j = new Jeu();
+        /*Jeu j = new Jeu();
         Console c = new Console(j);
 
         j.addObserver(c);
@@ -32,6 +32,8 @@ public class Console implements Observer {
             }
         }catch (Exception e) {
             System.out.println(e.getMessage());
-        }
+        }*/
+
+        System.out.println(5>=4);
     }
 }

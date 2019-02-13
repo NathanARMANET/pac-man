@@ -2,6 +2,7 @@ package sample;
 
 public class Entitee {
     public int x, y;
+    public int START_X, START_Y;
     public Direction d;
     public int etatCase;
     public boolean fantome;
@@ -10,7 +11,9 @@ public class Entitee {
     public Entitee(int x, int y, int value, boolean estFantome) {
         this.x = x;
         this.y = y;
-        this.d = Direction.droite;
+        this.START_X = x;
+        this.START_Y = y;
+        this.d = Direction.immobile;
         if (estFantome) {
             this.etatCase = 1;
         }else {
@@ -26,23 +29,54 @@ public class Entitee {
         int rows = Grille.HAUTEUR;
 
         if ((d.equals(Direction.haut) && (x-1 >= 0) && j.grid.grille[x-1][y] != 8)) {
-            x--;
-            j.grid.grille[x+1][y] = etatCase;
+            if (j.grid.grille[x-1][y] >= 4 || !fantome) {
+                j.life--;
+                j.grid.grille[x][y] = etatCase;
+                x = START_X;
+                y = START_Y;
+            }else {
+                x--;
+                j.grid.grille[x+1][y] = etatCase;
+            }
             tmp = j.grid.grille[x][y];
             j.grid.grille[x][y] = value;
         }else if (d.equals(Direction.bas)&& (x+1 < cols) && j.grid.grille[x+1][y] != 8) {
-            x++;
-            j.grid.grille[x-1][y] = etatCase;
+            if (j.grid.grille[x+1][y] >= 4 && !fantome) {
+                System.out.println("no");
+                j.life--;
+                j.grid.grille[x][y] = etatCase;
+                x = START_X;
+                y = START_Y;
+            }else {
+                System.out.println("yes");
+                x++;
+                j.grid.grille[x-1][y] = etatCase;
+            }
             tmp = j.grid.grille[x][y];
             j.grid.grille[x][y] = value;
         }else if (d.equals(Direction.gauche)&& (y-1 >= 0) && j.grid.grille[x][y-1] != 8) {
-            y--;
-            j.grid.grille[x][y+1] = etatCase;
+            if (j.grid.grille[x][y-1] >= 4 || !fantome) {
+                j.life--;
+                j.grid.grille[x][y] = etatCase;
+                x = START_X;
+                y = START_Y;
+                j.grid.grille[x][y] = value;
+            }else {
+                y--;
+                j.grid.grille[x][y+1] = etatCase;
+            }
             tmp = j.grid.grille[x][y];
             j.grid.grille[x][y] = value;
         }else if (d.equals(Direction.droite)&& (y+1 < rows) && j.grid.grille[x][y+1] != 8) {
-            y++;
-            j.grid.grille[x][y-1] = etatCase;
+            if (j.grid.grille[x][y+1] >= 4 || !fantome) {
+                j.life--;
+                j.grid.grille[x][y] = etatCase;
+                x = START_X;
+                y = START_Y;
+            }else {
+                y++;
+                j.grid.grille[x][y-1] = etatCase;
+            }
             tmp = j.grid.grille[x][y];
             j.grid.grille[x][y] = value;
         }else {
@@ -53,7 +87,7 @@ public class Entitee {
         if (fantome) {
             etatCase = tmp;
         }else {
-            j.score += tmp*100;
+            j.score += tmp*10;
         }
     }
 }
