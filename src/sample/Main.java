@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -12,7 +11,6 @@ import javafx.stage.Stage;
 
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Vector;
 
 public class Main extends Application implements Observer {
     public Jeu jeu;
@@ -21,7 +19,7 @@ public class Main extends Application implements Observer {
     public Text life;
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         jeu = new Jeu();
 
         primaryStage.setTitle("Pac Man");
@@ -50,6 +48,8 @@ public class Main extends Application implements Observer {
         consigne.setX(800);
         consigne.setY(40);
 
+        root.getChildren().add(consigne);
+
         score = new Text();
         score.setX(800);
         score.setY(20);
@@ -62,37 +62,61 @@ public class Main extends Application implements Observer {
 
         root.getChildren().add(life);
 
-        final TextField txt = new TextField();
+        //TextField txt = new TextField();
 
-        root.getChildren().add(txt);
+        //root.getChildren().add(txt);
 
-        EventHandler<KeyEvent> keyEventHander;
-        keyEventHander = new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                /*
-                switch (event.getCharacter()) {
-                    case "z": jeu.pacman.d = Direction.haut;
+        EventHandler<KeyEvent> keyEventHander = event -> {
+            switch (event.getCharacter()) {
+                //deplacement pac-mac
+                case "z" : jeu.pacman.d = Direction.haut;
                     break;
-                    
-                    case "d": jeu.pacman.d = Direction.droite;
+
+                case "d" : jeu.pacman.d = Direction.droite;
                     break;
-                    
-                    case "s": jeu.pacman.d = Direction.bas;
+
+                case "s" : jeu.pacman.d = Direction.bas;
                     break;
-                    
-                    case "q": jeu.pacman.d = Direction.gauche;
+
+                case "q" : jeu.pacman.d = Direction.gauche;
                     break;
-                }*/
-                txt.clear();
+
+                //choix fantome
+                case "w" : jeu.fantomeJ2 = 0;
+                    break;
+
+                case "x" : jeu.fantomeJ2 = 1;
+                    break;
+
+                case "c" : jeu.fantomeJ2 = 2;
+                    break;
+
+                case "v" : jeu.fantomeJ2 = 3;
+                    break;
+
+                //deplacement fantome
+                case "i" : jeu.fantomes[jeu.fantomeJ2].d = Direction.haut;
+                    break;
+
+                case "l" : jeu.fantomes[jeu.fantomeJ2].d = Direction.droite;
+                    break;
+
+                case "k" : jeu.fantomes[jeu.fantomeJ2].d = Direction.bas;
+                    break;
+
+                case "j" : jeu.fantomes[jeu.fantomeJ2].d = Direction.gauche;
+                    break;
             }
+            //txt.clear();
         };
 
-        txt.addEventHandler(KeyEvent.KEY_TYPED, keyEventHander);
-
-        root.getChildren().add(consigne);
+        root.requestFocus();
 
         primaryStage.setScene(new Scene(root, 1000, 800));
+
+        primaryStage.addEventHandler(KeyEvent.KEY_TYPED, keyEventHander);
+
+        primaryStage.requestFocus();
 
         primaryStage.show();
 
@@ -110,8 +134,8 @@ public class Main extends Application implements Observer {
 
     public static void main(String[] args) {
         launch(args);
-        
+
     }
-    
-    
+
+
 }
