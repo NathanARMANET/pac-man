@@ -6,7 +6,8 @@ public class Jeu extends Observable implements Runnable{
 
     public Grille grid;
     public Entitee pacman;
-    public Entitee[] fantomes;
+    public Fantome[] fantomes;
+    public int fantomeJ2;
     public int score;
     public int life = 3;
 
@@ -16,13 +17,17 @@ public class Jeu extends Observable implements Runnable{
         pacman.d = Direction.immobile;
         grid.grille[13][7] = pacman.value;
 
-        fantomes = new Entitee[4];
+        fantomes = new Fantome[4];
         for (int i = 0 ; i < 4 ; i++) {
-            fantomes[i] = new Entitee(12+i, 16, 4+i, true);
+            fantomes[i] = new Fantome(12+i, 16, 4+i, true);
             grid.grille[12+i][16] = fantomes[i].value;
+            fantomes[i].d = Direction.immobile;
         }
-        score = 0;
 
+        fantomes[1].d = Direction.droite;
+        fantomes[2].d = Direction.droite;
+        score = 0;
+        fantomeJ2 = 4;
     }
 
     public String getState() {
@@ -33,7 +38,14 @@ public class Jeu extends Observable implements Runnable{
     public void run() {
         try {
             while (life>0) {
-                pacman.deplacer(this);
+                for (int i = 0 ; i < 4 ; i++) {
+                    if (i != fantomeJ2) {
+                        fantomes[i].deplacerAlea(this);
+                    }
+                }
+                if (fantomeJ2 < 4) {
+                    fantomes[fantomeJ2].deplacer(this);
+                }
                 setChanged();
                 notifyObservers();
                 Thread.sleep(500);
