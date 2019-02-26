@@ -134,5 +134,8 @@ public class Main extends Application implements Observer {
 
     public static void main(String[] args) {
         launch(args);
+
     }
+
+
 }
