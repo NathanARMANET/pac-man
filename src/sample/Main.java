@@ -62,26 +62,28 @@ public class Main extends Application implements Observer {
 
         root.getChildren().add(life);
 
-        TextField txt = new TextField();
+        final TextField txt = new TextField();
 
         root.getChildren().add(txt);
 
-        EventHandler<KeyEvent> keyEventHander = new EventHandler<KeyEvent>() {
+        EventHandler<KeyEvent> keyEventHander;
+        keyEventHander = new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
+                /*
                 switch (event.getCharacter()) {
                     case "z": jeu.pacman.d = Direction.haut;
-                        break;
-
+                    break;
+                    
                     case "d": jeu.pacman.d = Direction.droite;
-                        break;
-
+                    break;
+                    
                     case "s": jeu.pacman.d = Direction.bas;
-                        break;
-
+                    break;
+                    
                     case "q": jeu.pacman.d = Direction.gauche;
-                        break;
-                }
+                    break;
+                }*/
                 txt.clear();
             }
         };
@@ -108,5 +110,8 @@ public class Main extends Application implements Observer {
 
     public static void main(String[] args) {
         launch(args);
+        
     }
+    
+    
 }
