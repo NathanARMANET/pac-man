@@ -14,14 +14,12 @@ public class Entitee {
         this.START_X = x;
         this.START_Y = y;
         this.d = Direction.immobile;
-        if (estFantome) {
-            this.etatCase = 1;
-        }else {
-            this.etatCase = 0;
-        }
+        this.etatCase = 0;
         this.fantome = estFantome;
         this.value = value;
     }
+
+
 
     public void deplacer(Jeu j) {
         int tmp;
@@ -29,7 +27,7 @@ public class Entitee {
         int rows = Grille.HAUTEUR;
 
         if ((d.equals(Direction.haut) && (x-1 >= 0) && j.grid.grille[x-1][y] != 8)) {
-            if (j.grid.grille[x-1][y] >= 4 || !fantome) {
+            if (j.grid.grille[x-1][y] >= 4 && j.grid.grille[x+1][y] < 8 && !fantome) {
                 j.life--;
                 j.grid.grille[x][y] = etatCase;
                 x = START_X;
@@ -41,21 +39,19 @@ public class Entitee {
             tmp = j.grid.grille[x][y];
             j.grid.grille[x][y] = value;
         }else if (d.equals(Direction.bas)&& (x+1 < cols) && j.grid.grille[x+1][y] != 8) {
-            if (j.grid.grille[x+1][y] >= 4 && !fantome) {
-                System.out.println("no");
+            if (j.grid.grille[x+1][y] >= 4 && j.grid.grille[x+1][y] < 8 && !fantome) {
                 j.life--;
                 j.grid.grille[x][y] = etatCase;
                 x = START_X;
                 y = START_Y;
             }else {
-                System.out.println("yes");
                 x++;
                 j.grid.grille[x-1][y] = etatCase;
             }
             tmp = j.grid.grille[x][y];
             j.grid.grille[x][y] = value;
         }else if (d.equals(Direction.gauche)&& (y-1 >= 0) && j.grid.grille[x][y-1] != 8) {
-            if (j.grid.grille[x][y-1] >= 4 || !fantome) {
+            if (j.grid.grille[x][y-1] >= 4&& j.grid.grille[x+1][y] < 8 && !fantome) {
                 j.life--;
                 j.grid.grille[x][y] = etatCase;
                 x = START_X;
@@ -68,7 +64,7 @@ public class Entitee {
             tmp = j.grid.grille[x][y];
             j.grid.grille[x][y] = value;
         }else if (d.equals(Direction.droite)&& (y+1 < rows) && j.grid.grille[x][y+1] != 8) {
-            if (j.grid.grille[x][y+1] >= 4 || !fantome) {
+            if (j.grid.grille[x][y+1] >= 4&& j.grid.grille[x+1][y] < 8 && !fantome) {
                 j.life--;
                 j.grid.grille[x][y] = etatCase;
                 x = START_X;
