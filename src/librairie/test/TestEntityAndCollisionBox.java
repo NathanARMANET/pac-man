@@ -10,10 +10,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import librairie.Entity;
 
@@ -24,6 +26,7 @@ import librairie.Entity;
 public class TestEntityAndCollisionBox extends Application{
 
     private Group root;
+    private ArrayList<GraphicalEntity> lst = new ArrayList<GraphicalEntity>();
             
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -38,13 +41,16 @@ public class TestEntityAndCollisionBox extends Application{
         createEntity(100,50);
         primaryStage.show();
         
+        
         new Thread( new Runnable() {
             @Override
             public void run() {
                 for (int i = 0; i < 10000; i++) {
-                    ((GraphicalEntity)root.getChildren().get(0)).translate(i, i);
+                    if(!lst.get(0).checkCollision(lst.get(1)))
+                        ((GraphicalEntity)lst.get(0)).translateY(i);
+                    
                     try {
-                        Thread.sleep(100);
+                        Thread.sleep(40);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(TestEntityAndCollisionBox.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -56,10 +62,9 @@ public class TestEntityAndCollisionBox extends Application{
     }
     
     public void createEntity(float x, float y){
-        Entity entity = new Entity(x,y,10,10);
-        Node rec = new GraphicalEntity(x, y, 20, 20);
-        
-        root.getChildren().add(rec);
+        GraphicalEntity entity = new GraphicalEntity(x,y,50,10);        
+        root.getChildren().add(entity);
+        lst.add(entity);
         
     }
     

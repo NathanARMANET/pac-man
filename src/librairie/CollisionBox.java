@@ -2,23 +2,23 @@ package librairie;
 
 public class CollisionBox {
 	
-	private float _height;
-	private float _width;
+	private double _height;
+	private double _width;
 	
-	public float getHeight() {
+	public double getHeight() {
 		return _height;
 	}
-	public float getWidth() {
+	public double getWidth() {
 		return _width;
 	}
-	public void setHeight(float _height) {
+	public void setHeight(double _height) {
 		this._height = _height;
 	}
-	public void setWidth(float _width) {
+	public void setWidth(double _width) {
 		this._width = _width;
 	}
 	
-	public CollisionBox(float height, float width) {
+	public CollisionBox(double height, double width) {
 		setHeight(height);
 		setWidth(width);
 	}

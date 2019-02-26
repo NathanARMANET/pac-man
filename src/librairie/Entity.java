@@ -2,44 +2,44 @@ package librairie;
 
 public class Entity{
 
-	private float _x;
-	private float _y;
+	private double _x;
+	private double _y;
 	
 	private CollisionBox _hitBox;
 
-	public float getX() {
+	public double getX() {
             return _x;
 	
         }
 
-	public float getY() {
+	public double getY() {
             return _y;
 	}
 	
 
-	public void setX(float x) {
+	public void setX(double x) {
             _x = x;
 	}
 	
 
-	public void setY(float y) {
+	public void setY(double y) {
             _y = y;
 	}
 	
-	public Entity(float x, float y, CollisionBox hitBox) {
+	public Entity(double x, double y, CollisionBox hitBox) {
             _x = x;
             _y = y;
             _hitBox = hitBox;
 	}
 	
-	public Entity(float x, float y, float height, float width) {
+	public Entity(double x, double y, double height, double width) {
             _x = x;
             _y = y;
             _hitBox = new CollisionBox(height, width);
 	}
 	
 
-	public void translate(float x, float y) {
+	public void translate(double x, double y) {
             _x = x;
             _y = y;
 	}
@@ -48,8 +48,8 @@ public class Entity{
 	public boolean checkCollision(Entity obj) {
             if((_x >= obj._x + obj._hitBox.getWidth())      // trop à droite
                 || (_x + _hitBox.getWidth() <= obj._x) // trop à gauche
-                || (_x >= obj._x + obj._hitBox.getWidth()) // trop en bas
-                || (_x + _hitBox.getWidth() <= obj._x))   // trop en haut
+                || (_y >= obj._y + obj._hitBox.getHeight()) // trop en bas
+                || (_y + _hitBox.getHeight() <= obj._y))   // trop en haut
                 return false; 
             else
                 return true;

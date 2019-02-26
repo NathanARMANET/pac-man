@@ -5,6 +5,7 @@
  */
 package librairie.test;
 
+import javafx.scene.Parent;
 import javafx.scene.shape.Rectangle;
 import librairie.Entity;
 
@@ -13,18 +14,42 @@ import librairie.Entity;
  *
  * @author thiti
  */
-public class GraphicalEntity extends Rectangle{
+public class GraphicalEntity extends Parent{
 
     private Entity entity;
     
-    public GraphicalEntity(float x, float y, float heigth, float width){
-        super(x,y,heigth,width);
-        entity = new Entity(x,y,heigth,width);
-    }
+    public Entity getEntity(){
+        return entity;
+    } 
     
-    public void translate(float x, float y){
+    public GraphicalEntity(double x, double y, double heigth, double width ){
+        
+        // bug collinsion
+        Rectangle rect = new Rectangle(x,y,width,heigth);
+        entity = new Entity(x,y,heigth,width);
+        // on ajoute le rectangle au groupe
+        this.getChildren().add(rect);
+    }    
+    
+    @Override
+    public void relocate(double x, double y){
         super.relocate(x, y);
         entity.translate(x, y);
-    }   
+    }
     
+    public void translateX(double x){
+        entity.translate(x, entity.getY());
+        super.relocate(x, entity.getY());
+        
+    }
+    
+    public void translateY(double y){
+        entity.translate(entity.getX(), y);
+        super.relocate(entity.getX(), y);
+        
+    }
+  
+    public boolean checkCollision(GraphicalEntity obj){
+        return entity.checkCollision(obj.getEntity());
+    }
 }
