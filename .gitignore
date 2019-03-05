@@ -1,4 +1,2 @@
-*.class
-*.xml
-.idea/
-.out/
+.idea/*
+.out/*
