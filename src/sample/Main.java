@@ -119,7 +119,7 @@ public class Main extends Application implements Observer {
                     break;
             }
         };
-        
+
         root.requestFocus();
 
         primaryStage.setScene(new Scene(root, 1000, 800));

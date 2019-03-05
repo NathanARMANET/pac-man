@@ -17,9 +17,7 @@ public class BoardManager {
 	
 	public boolean checkCollision(Entity entity) {
 		for (Entity entityTested : _entities) {
-			if(entity != entityTested)
-				if(entity.checkCollision(entityTested))
-					return true; // sorry
+			if((entity != entityTested) && (entity.checkCollision(entityTested))) return true; // sorry
 		}
 		return false;
 	}

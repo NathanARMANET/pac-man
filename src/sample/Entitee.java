@@ -19,10 +19,6 @@ public class Entitee {
         this.value = value;
     }
 
-
-
-
-
     public void deplacer(Jeu j) {
 
         if (d != Direction.immobile) {
