@@ -79,27 +79,27 @@ public class Main extends Application implements Observer {
                 //deplacement pac-mac
                 case "z" : jeu.pacman.d = Direction.haut;
                     break;
-                    
-                    case "d" : jeu.pacman.d = Direction.droite;
+
+                case "d" : jeu.pacman.d = Direction.droite;
                     break;
-                    
-                    case "s" : jeu.pacman.d = Direction.bas;
+
+                case "s" : jeu.pacman.d = Direction.bas;
                     break;
-                    
-                    case "q" : jeu.pacman.d = Direction.gauche;
+
+                case "q" : jeu.pacman.d = Direction.gauche;
                     break;
-                    
-                    //choix fantome
-                    case "w" : jeu.fantomeJ2 = 0;
+
+                //choix fantome
+                case "w" : jeu.fantomeJ2 = 0;
                     break;
-                    
-                    case "x" : jeu.fantomeJ2 = 1;
+
+                case "x" : jeu.fantomeJ2 = 1;
                     break;
-                    
-                    case "c" : jeu.fantomeJ2 = 2;
+
+                case "c" : jeu.fantomeJ2 = 2;
                     break;
-                    
-                    case "v" : jeu.fantomeJ2 = 3;
+
+                case "v" : jeu.fantomeJ2 = 3;
                     break;
 
                 case "n" : jeu.fantomeJ2 = 4;
@@ -117,10 +117,9 @@ public class Main extends Application implements Observer {
 
                 case "j" : if (jeu.fantomeJ2 < 4) jeu.fantomes[jeu.fantomeJ2].d = Direction.gauche;
                     break;
-                }
             }
         };
-
+        
         root.requestFocus();
 
         primaryStage.setScene(new Scene(root, 1000, 800));
