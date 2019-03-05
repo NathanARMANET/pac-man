@@ -44,7 +44,18 @@ public class Main extends Application implements Observer {
                 "- z -> haut\n" +
                 "- d -> droite\n" +
                 "- q -> gauche\n" +
-                "- s -> bas");
+                "- s -> bas\n\n" +
+
+                "- i -> haut fantome J2\n" +
+                "- l -> droite fantome J2\n" +
+                "- k -> bas fantome J2\n" +
+                "- j -> gauche fantome J2\n\n" +
+
+                "- w -> fantome Rouge\n" +
+                "- x -> fantome Bleu\n" +
+                "- c -> fantome Rose\n" +
+                "- v -> fantome Vert\n" +
+                "- n -> pas de fantome\n");
         consigne.setX(800);
         consigne.setY(40);
 
@@ -61,10 +72,6 @@ public class Main extends Application implements Observer {
         life.setY(20);
 
         root.getChildren().add(life);
-
-        //TextField txt = new TextField();
-
-        //root.getChildren().add(txt);
 
         EventHandler<KeyEvent> keyEventHander = event -> {
             switch (event.getCharacter()) {
@@ -94,17 +101,20 @@ public class Main extends Application implements Observer {
                 case "v" : jeu.fantomeJ2 = 3;
                     break;
 
+                case "n" : jeu.fantomeJ2 = 4;
+                    break;
+
                 //deplacement fantome
-                case "i" : jeu.fantomes[jeu.fantomeJ2].d = Direction.haut;
+                case "i" : if (jeu.fantomeJ2 < 4) jeu.fantomes[jeu.fantomeJ2].d = Direction.haut;
                     break;
 
-                case "l" : jeu.fantomes[jeu.fantomeJ2].d = Direction.droite;
+                case "l" : if (jeu.fantomeJ2 < 4) jeu.fantomes[jeu.fantomeJ2].d = Direction.droite;
                     break;
 
-                case "k" : jeu.fantomes[jeu.fantomeJ2].d = Direction.bas;
+                case "k" : if (jeu.fantomeJ2 < 4) jeu.fantomes[jeu.fantomeJ2].d = Direction.bas;
                     break;
 
-                case "j" : jeu.fantomes[jeu.fantomeJ2].d = Direction.gauche;
+                case "j" : if (jeu.fantomeJ2 < 4) jeu.fantomes[jeu.fantomeJ2].d = Direction.gauche;
                     break;
             }
             //txt.clear();

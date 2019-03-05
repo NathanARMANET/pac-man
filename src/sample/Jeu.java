@@ -46,6 +46,7 @@ public class Jeu extends Observable implements Runnable{
                 if (fantomeJ2 < 4) {
                     fantomes[fantomeJ2].deplacer(this);
                 }
+                pacman.deplacer(this);
                 setChanged();
                 notifyObservers();
                 Thread.sleep(500);
