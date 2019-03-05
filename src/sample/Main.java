@@ -44,7 +44,18 @@ public class Main extends Application implements Observer {
                 "- z -> haut\n" +
                 "- d -> droite\n" +
                 "- q -> gauche\n" +
-                "- s -> bas");
+                "- s -> bas\n\n" +
+
+                "- i -> haut fantome J2\n" +
+                "- l -> droite fantome J2\n" +
+                "- k -> bas fantome J2\n" +
+                "- j -> gauche fantome J2\n\n" +
+
+                "- w -> fantome Rouge\n" +
+                "- x -> fantome Bleu\n" +
+                "- c -> fantome Rose\n" +
+                "- v -> fantome Vert\n" +
+                "- n -> pas de fantome\n");
         consigne.setX(800);
         consigne.setY(40);
 
@@ -62,17 +73,11 @@ public class Main extends Application implements Observer {
 
         root.getChildren().add(life);
 
-        //TextField txt = new TextField();
 
-        //root.getChildren().add(txt);
-
-        EventHandler<KeyEvent> keyEventHander;
-        keyEventHander = new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                switch (event.getCharacter()) {
-                    //deplacement pac-mac
-                    case "z" : jeu.pacman.d = Direction.haut;
+        EventHandler<KeyEvent> keyEventHander = event -> {
+            switch (event.getCharacter()) {
+                //deplacement pac-mac
+                case "z" : jeu.pacman.d = Direction.haut;
                     break;
                     
                     case "d" : jeu.pacman.d = Direction.droite;
@@ -96,18 +101,21 @@ public class Main extends Application implements Observer {
                     
                     case "v" : jeu.fantomeJ2 = 3;
                     break;
-                    
-                    //deplacement fantome
-                    case "i" : jeu.fantomes[jeu.fantomeJ2].d = Direction.haut;
+
+                case "n" : jeu.fantomeJ2 = 4;
                     break;
-                    
-                    case "l" : jeu.fantomes[jeu.fantomeJ2].d = Direction.droite;
+
+                //deplacement fantome
+                case "i" : if (jeu.fantomeJ2 < 4) jeu.fantomes[jeu.fantomeJ2].d = Direction.haut;
                     break;
-                    
-                    case "k" : jeu.fantomes[jeu.fantomeJ2].d = Direction.bas;
+
+                case "l" : if (jeu.fantomeJ2 < 4) jeu.fantomes[jeu.fantomeJ2].d = Direction.droite;
                     break;
-                    
-                    case "j" : jeu.fantomes[jeu.fantomeJ2].d = Direction.gauche;
+
+                case "k" : if (jeu.fantomeJ2 < 4) jeu.fantomes[jeu.fantomeJ2].d = Direction.bas;
+                    break;
+
+                case "j" : if (jeu.fantomeJ2 < 4) jeu.fantomes[jeu.fantomeJ2].d = Direction.gauche;
                     break;
                 }
             }

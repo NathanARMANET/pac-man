@@ -97,9 +97,7 @@ public class Grille {
                     case 3 :
                         color = Color.YELLOW; // pac-man
                         break;
-        //switch("1"){
-            
-        //}
+
                     case 4 :
                         color = Color.RED; // fantomeRouge
                         break;
