@@ -5,30 +5,31 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import jeu.Jeu;
+import librairie.Direction;
 
 import java.util.Observable;
 import java.util.Observer;
 import librairie.Direction;
 
 public class Main extends Application implements Observer {
-    public Jeu jeu;
-    public Text score;
-    public Text life;
+
+    public Jeu _jeu;
+    public Text _score;
+    public Text _life;
 
     @Override
     public void start(Stage primaryStage) {
-        jeu = new Jeu();
+        _jeu = new Jeu();
 
         primaryStage.setTitle("Pac Man");
 
         Group root = new Group();
 
-        root.getChildren().add(jeu.getPacman());
+        root.getChildren().add(_jeu.getPacman());
+
 
         Text consigne = new Text();
         consigne.setText("Touche pour deplacer Pac-man :\n" +
@@ -52,17 +53,17 @@ public class Main extends Application implements Observer {
 
         root.getChildren().add(consigne);
 
-        score = new Text();
-        score.setX(800);
-        score.setY(20);
+        _score = new Text();
+        _score.setX(800);
+        _score.setY(20);
 
-        root.getChildren().add(score);
+        root.getChildren().add(_score);
 
-        life = new Text();
-        life.setX(600);
-        life.setY(20);
+        _life = new Text();
+        _life.setX(600);
+        _life.setY(20);
 
-        root.getChildren().add(life);
+        root.getChildren().add(_life);
         
         
         EventHandler<KeyEvent> keyEventHander = event -> {
@@ -84,35 +85,51 @@ public class Main extends Application implements Observer {
                 //choix fantome
                 /*
                 case "w" : jeu.fantomeJ2 = 0;
+=======
+                case "z" : _jeu.get_pacman().changeDirection(Direction.haut);
                     break;
 
-                case "x" : jeu.fantomeJ2 = 1;
+                case "d" : _jeu.get_pacman().changeDirection(Direction.droite);
                     break;
 
-                case "c" : jeu.fantomeJ2 = 2;
+                case "s" : _jeu.get_pacman().changeDirection(Direction.bas);
                     break;
 
-                case "v" : jeu.fantomeJ2 = 3;
+                case "q" : _jeu.get_pacman().changeDirection(Direction.gauche);
                     break;
 
-                case "n" : jeu.fantomeJ2 = 4;
+                //choix fantome
+                case "w" : _jeu.set_fantomeJ2(0);
+>>>>>>> c1a32340dd4882158a0ebc535e560cad1af90429
+                    break;
+
+                case "x" : _jeu.set_fantomeJ2(1);
+                    break;
+
+                case "c" : _jeu.set_fantomeJ2(2);
+                    break;
+
+                case "v" : _jeu.set_fantomeJ2(3);
+                    break;
+
+                case "n" : _jeu.set_fantomeJ2(4);
                     break;
 
                 //deplacement fantome
-                case "i" : if (jeu.fantomeJ2 < 4) jeu.fantomes[jeu.fantomeJ2].d = Direction.haut;
+                case "i" : if (_jeu.get_fantomeJ2() < 4) _jeu.get_fantomes(_jeu.get_fantomeJ2()).changeDirection(Direction.haut);
                     break;
 
-                case "l" : if (jeu.fantomeJ2 < 4) jeu.fantomes[jeu.fantomeJ2].d = Direction.droite;
+                case "l" : if (_jeu.get_fantomeJ2() < 4) _jeu.get_fantomes(_jeu.get_fantomeJ2()).changeDirection(Direction.droite);
                     break;
 
-                case "k" : if (jeu.fantomeJ2 < 4) jeu.fantomes[jeu.fantomeJ2].d = Direction.bas;
+                case "k" : if (_jeu.get_fantomeJ2() < 4) _jeu.get_fantomes(_jeu.get_fantomeJ2()).changeDirection(Direction.bas);
                     break;
 
-                case "j" : if (jeu.fantomeJ2 < 4) jeu.fantomes[jeu.fantomeJ2].d = Direction.gauche;
+                case "j" : if (_jeu.get_fantomeJ2() < 4) _jeu.get_fantomes(_jeu.get_fantomeJ2()).changeDirection(Direction.gauche);
                     break;
                     */
             }
-            jeu.getPacman().changeDirection(dir);
+            _jeu.getPacman().changeDirection(dir);
         };
 
         root.requestFocus();
@@ -125,16 +142,14 @@ public class Main extends Application implements Observer {
 
         primaryStage.show();
 
-        jeu.addObserver(this);
+        _jeu.addObserver(this);
 
-        new Thread(jeu).start();
+        new Thread(_jeu).start();
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        //score.setText("Score : "+jeu.score);
-        //life.setText("Life : "+jeu.life);
-        //jeu.grid.affichage(rectGrid);
+
     }
 
     public static void main(String[] args) {
