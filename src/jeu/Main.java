@@ -30,6 +30,8 @@ public class Main extends Application implements Observer {
 
         root.getChildren().add(_jeu.getPacman());
 
+        _jeu.initGrille(root);
+
 
         Text consigne = new Text();
         consigne.setText("Touche pour deplacer Pac-man :\n" +

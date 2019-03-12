@@ -50,6 +50,22 @@ public class MovableEntity extends Entity {
     }
 
     public void eventCollision(Entity obj) {
+        switch (_d) {
+            case haut: _y += _speed;
+                break;
+
+            case bas: _y -= _speed;
+                break;
+
+            case gauche: _x += _speed;
+                break;
+
+            case droite: _x -= _speed;
+                break;
+
+            default: break;
+        }
+        this._d = Direction.immobile;
         notifyObservers(obj);
     }
 }

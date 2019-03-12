@@ -6,18 +6,12 @@
 package librairie.test;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import librairie.Entity;
 
 /**
  *
@@ -26,7 +20,7 @@ import librairie.Entity;
 public class TestEntityAndCollisionBox extends Application{
 
     private Group root;
-    private ArrayList<GraphicalEntity> lst = new ArrayList<GraphicalEntity>();
+    private ArrayList<GraphicalEntityTest> lst = new ArrayList<GraphicalEntityTest>();
             
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -47,7 +41,7 @@ public class TestEntityAndCollisionBox extends Application{
             public void run() {
                 for (int i = 0; i < 10000; i++) {
                     if(!lst.get(0).checkCollision(lst.get(1)))
-                        ((GraphicalEntity)lst.get(0)).translateY(i);
+                        ((GraphicalEntityTest)lst.get(0)).translateY(i);
                     
                     try {
                         Thread.sleep(40);
@@ -62,7 +56,7 @@ public class TestEntityAndCollisionBox extends Application{
     }
     
     public void createEntity(float x, float y){
-        GraphicalEntity entity = new GraphicalEntity(x,y,50,10);        
+        GraphicalEntityTest entity = new GraphicalEntityTest(x,y,50,10);
         root.getChildren().add(entity);
         lst.add(entity);
         

@@ -14,7 +14,7 @@ import librairie.Entity;
  *
  * @author thiti
  */
-public class GraphicalEntity extends Parent{
+public class GraphicalEntityTest extends Parent{
 
     private Entity entity;
     
@@ -22,7 +22,7 @@ public class GraphicalEntity extends Parent{
         return entity;
     } 
     
-    public GraphicalEntity(double x, double y, double heigth, double width ){
+    public GraphicalEntityTest(double x, double y, double heigth, double width ){
         
         // bug collinsion
         Rectangle rect = new Rectangle(x,y,width,heigth);
@@ -49,7 +49,7 @@ public class GraphicalEntity extends Parent{
         
     }
   
-    public boolean checkCollision(GraphicalEntity obj){
+    public boolean checkCollision(GraphicalEntityTest obj){
         return entity.checkCollision(obj.getEntity());
     }
 }
