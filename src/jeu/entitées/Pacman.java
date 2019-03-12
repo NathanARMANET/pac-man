@@ -10,7 +10,7 @@ import librairie.GraphicalEntity;
 import librairie.MovableEntity;
 import librairie.Direction;
 
-public class PacMan extends Parent implements Observer,GraphicalEntity{
+public class Pacman extends Parent implements Observer,GraphicalEntity{
     
     private MovableEntity _entity;
     private Shape _image;             
@@ -19,7 +19,11 @@ public class PacMan extends Parent implements Observer,GraphicalEntity{
         return _entity;
     }
     
-    public PacMan(double x, double y, double heigth, double width, double speed){
+    public Shape getImage(){
+        return _image;
+    }
+    
+    public Pacman(double x, double y, double heigth, double width, double speed){
         _entity = new MovableEntity(x, y, heigth, width, speed);
         _entity.setGraphicalEntity((librairie.test.GraphicalEntity)(GraphicalEntity)this); // ??
         _entity.addObserver(this);
