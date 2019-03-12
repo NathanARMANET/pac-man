@@ -4,11 +4,20 @@ import jeu.entitées.Fantome;
 import jeu.entitées.Pacman;
 
 import java.util.Observable;
+import jeu.entitées.Pacman;
+import librairie.BoardManager;
 
 public class Jeu extends Observable implements Runnable {
+    
     private Pacman _pacman;
     private Fantome _tabFantomes[];
+<<<<<<< HEAD
     private int _fantomeJ2;
+=======
+    private BoardManager _boardManager;
+    
+    private int fantomeJ2;
+>>>>>>> 31a429c5b3a06de811367f0709ec7499ea6c6074
     private int _lives;
     private int _score;
 
@@ -52,8 +61,24 @@ public class Jeu extends Observable implements Runnable {
         this._score = score;
     }
 
+    public Jeu(){
+        _pacman = new Pacman(50, 50, 40, 40, 3);
+        
+        _boardManager = new BoardManager();
+        _boardManager.addMovableEntity(_pacman.getEntity());
+    }
+    
     @Override
     public void run() {
+        
+        _pacman.deplacer();
+        _boardManager.checkAllCollision();
+        try {
+            Thread.sleep(40);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+
 
     }
 }
