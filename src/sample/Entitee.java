@@ -5,6 +5,8 @@ public class Entitee {
     public int START_X, START_Y;
     public Direction d;
     public int etatCase;
+    public boolean superPacman;
+    public int tempsSuperPacman;
     public boolean fantome;
     public int value;
 
@@ -15,6 +17,8 @@ public class Entitee {
         this.START_Y = y;
         this.d = Direction.immobile;
         this.etatCase = 0;
+        this.superPacman = false;
+        this.tempsSuperPacman = -1;
         this.fantome = estFantome;
         this.value = value;
     }
@@ -99,6 +103,9 @@ public class Entitee {
             if (fantome) {
                 etatCase = tmp;
             }else {
+                if (tmp == 2) {
+                    this.superPacman = true;
+                }
                 j.score += tmp*10;
             }
         }
