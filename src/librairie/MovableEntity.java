@@ -4,7 +4,6 @@ public class MovableEntity extends Entity {
 
     private double _speed;
     private Direction _d;
-    private double _speed;
 
     public MovableEntity(double x, double y, CollisionBox hitBox, double speed) {
         super(x, y, hitBox);

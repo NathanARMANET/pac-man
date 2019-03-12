@@ -13,10 +13,10 @@ import jeu.Jeu;
 
 import java.util.Observable;
 import java.util.Observer;
+import librairie.Direction;
 
 public class Main extends Application implements Observer {
     public Jeu jeu;
-    public Rectangle[][] rectGrid;
     public Text score;
     public Text life;
 
@@ -28,18 +28,7 @@ public class Main extends Application implements Observer {
 
         Group root = new Group();
 
-        rectGrid = new Rectangle[Grille.LARGEUR][Grille.HAUTEUR];
-
-        for (int i = 0 ; i < Grille.LARGEUR ; i++) {
-            for (int j = 0 ; j < Grille.HAUTEUR ; j++) {
-                rectGrid[i][j] = new Rectangle();
-                rectGrid[i][j].setX(20*j);
-                rectGrid[i][j].setY(20*i+40);
-                rectGrid[i][j].setWidth(20);
-                rectGrid[i][j].setHeight(20);
-                root.getChildren().add(rectGrid[i][j]);
-            }
-        }
+        root.getChildren().add(jeu.getPacman());
 
         Text consigne = new Text();
         consigne.setText("Touche pour deplacer Pac-man :\n" +
@@ -74,24 +63,26 @@ public class Main extends Application implements Observer {
         life.setY(20);
 
         root.getChildren().add(life);
-
-
+        
+        
         EventHandler<KeyEvent> keyEventHander = event -> {
+            Direction dir = Direction.immobile;
             switch (event.getCharacter()) {
                 //deplacement pac-mac
-                case "z" : jeu.pacman.d = Direction.haut;
+                case "z" : dir = Direction.haut;
                     break;
 
-                case "d" : jeu.pacman.d = Direction.droite;
+                case "d" : dir =  Direction.droite;
                     break;
 
-                case "s" : jeu.pacman.d = Direction.bas;
+                case "s" : dir =  Direction.bas;
                     break;
 
-                case "q" : jeu.pacman.d = Direction.gauche;
+                case "q" : dir =  Direction.gauche;
                     break;
 
                 //choix fantome
+                /*
                 case "w" : jeu.fantomeJ2 = 0;
                     break;
 
@@ -119,7 +110,9 @@ public class Main extends Application implements Observer {
 
                 case "j" : if (jeu.fantomeJ2 < 4) jeu.fantomes[jeu.fantomeJ2].d = Direction.gauche;
                     break;
+                    */
             }
+            jeu.getPacman().changeDirection(dir);
         };
 
         root.requestFocus();
@@ -139,9 +132,9 @@ public class Main extends Application implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        score.setText("Score : "+jeu.score);
-        life.setText("Life : "+jeu.life);
-        jeu.grid.affichage(rectGrid);
+        //score.setText("Score : "+jeu.score);
+        //life.setText("Life : "+jeu.life);
+        //jeu.grid.affichage(rectGrid);
     }
 
     public static void main(String[] args) {

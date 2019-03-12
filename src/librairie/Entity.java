@@ -1,7 +1,7 @@
 package librairie;
 
 import java.util.Observable;
-import librairie.test.GraphicalEntity;
+import librairie.GraphicalEntity;
 
 public class Entity extends Observable{
 
