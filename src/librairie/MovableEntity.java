@@ -4,6 +4,7 @@ public class MovableEntity extends Entity {
 
     private double _speed;
     private Direction _d;
+    private double _speed;
 
     public MovableEntity(double x, double y, CollisionBox hitBox, double speed) {
         super(x, y, hitBox);
@@ -50,8 +51,6 @@ public class MovableEntity extends Entity {
     }
 
     public void eventCollision(Entity obj) {
-        /**
-         * A definir dans le jeu
-         */
+        notifyObservers(obj);
     }
 }
