@@ -11,13 +11,9 @@ public class Jeu extends Observable implements Runnable {
     
     private Pacman _pacman;
     private Fantome _tabFantomes[];
-<<<<<<< HEAD
-    private int _fantomeJ2;
-=======
     private BoardManager _boardManager;
     
-    private int fantomeJ2;
->>>>>>> 31a429c5b3a06de811367f0709ec7499ea6c6074
+    private int _fantomeJ2;
     private int _lives;
     private int _score;
 
