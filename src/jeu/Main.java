@@ -22,15 +22,12 @@ public class Main extends Application implements Observer {
 
     @Override
     public void start(Stage primaryStage) {
-        _jeu = new Jeu();
 
         primaryStage.setTitle("Pac Man");
 
         Group root = new Group();
 
-        root.getChildren().add(_jeu.getPacman());
-
-        _jeu.initGrille(root);
+        _jeu = new Jeu(root);
 
 
         Text consigne = new Text();
@@ -50,7 +47,7 @@ public class Main extends Application implements Observer {
                 "- c -> fantome Rose\n" +
                 "- v -> fantome Vert\n" +
                 "- n -> pas de fantome\n");
-        consigne.setX(800);
+        consigne.setX(950);
         consigne.setY(40);
 
         root.getChildren().add(consigne);
@@ -86,23 +83,7 @@ public class Main extends Application implements Observer {
 
                 //choix fantome
                 /*
-                case "w" : jeu.fantomeJ2 = 0;
-=======
-                case "z" : _jeu.get_pacman().changeDirection(Direction.haut);
-                    break;
-
-                case "d" : _jeu.get_pacman().changeDirection(Direction.droite);
-                    break;
-
-                case "s" : _jeu.get_pacman().changeDirection(Direction.bas);
-                    break;
-
-                case "q" : _jeu.get_pacman().changeDirection(Direction.gauche);
-                    break;
-
-                //choix fantome
                 case "w" : _jeu.set_fantomeJ2(0);
->>>>>>> c1a32340dd4882158a0ebc535e560cad1af90429
                     break;
 
                 case "x" : _jeu.set_fantomeJ2(1);
@@ -136,7 +117,7 @@ public class Main extends Application implements Observer {
 
         root.requestFocus();
 
-        primaryStage.setScene(new Scene(root, 1000, 800));
+        primaryStage.setScene(new Scene(root, 1200, 1000));
 
         primaryStage.addEventHandler(KeyEvent.KEY_TYPED, keyEventHander);
 
@@ -151,7 +132,8 @@ public class Main extends Application implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-
+        _score.setText("Score : "+ _jeu.get_score());
+        _life.setText("Life : "+ _jeu.get_lives());
     }
 
     public static void main(String[] args) {

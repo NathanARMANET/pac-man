@@ -56,7 +56,7 @@ public class TestEntityAndCollisionBox extends Application{
     }
     
     public void createEntity(float x, float y){
-        GraphicalEntityTest entity = new GraphicalEntityTest(x,y,50,10);
+        GraphicalEntityTest entity = new GraphicalEntityTest("test", x, y,50,10);
         root.getChildren().add(entity);
         lst.add(entity);
         
