@@ -1,9 +1,5 @@
 package librairie;
 
-import javafx.scene.paint.Color;
-import jeu.Jeu;
-import jeu.entitées.Pacgomme;
-
 import java.util.List;
 import java.util.ArrayList;
 
@@ -51,16 +47,13 @@ public class BoardManager {
         return null;
     }
 
-    public void checkAllCollision(Jeu jeu){
+    public void checkAllCollision(){
         for(MovableEntity entityTested : _movableEntities){
             Entity entity = checkCollision(entityTested);
             if(entity != null) {
-                entityTested.eventCollision(jeu, entity);
-                if (entity.get_name().equals("pacgomme") && entityTested.get_name().equals("pacman")) {
-                    ((Pacgomme)entity.getContainer()).getImage().setFill(Color.TRANSPARENT);
-                    _entities.remove(entity);
-                }
+                entityTested.eventCollision(entity);
             }
         }
     }
 }
+

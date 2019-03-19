@@ -15,8 +15,11 @@ import librairie.Entity;
 
 public class Pacman extends Parent implements Observer,GraphicalEntity{
     
+    private double _startX;
+    private double _startY;
     private MovableEntity _entity;
     private Shape _image;    
+    
     private BoardManager _boardManager;
 
     public MovableEntity getEntity(){
@@ -32,7 +35,7 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
     }
     
     public Pacman(double x, double y, double heigth, double width, double speed){
-        _entity = new MovableEntity("pacman", x, y, heigth, width, speed, this);
+        _entity = new MovableEntity("pacman", x, y, heigth, width, speed);
         _entity.setGraphicalEntity((GraphicalEntity)this);
         _entity.addObserver(this);
         _image = new Rectangle(x,y,width,heigth);
@@ -42,15 +45,17 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
     }
     
     public void changeDirection(Direction direction){
-        Direction oldDirection = _entity.get_d();
+        if (direction == null)
+            return;
+        Direction oldDirection = _entity.getDirection();
         double x = _entity.getX();
         double y = _entity.getY();
         
-        _entity.set_d(direction);
+        _entity.setDirection(direction);
         _entity.deplacer();
         Entity entity = _boardManager.checkCollision(_entity);
         if(entity != null){
-            _entity.set_d(oldDirection);
+            _entity.setDirection(oldDirection);
         }
         _entity.translate(x, y);
     }
@@ -59,7 +64,8 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
     public void deplacer(){
         Entity entity = _boardManager.upcommingCollision(_entity);
         if(entity != null){
-            _entity.eventCollision(entity);
+            
+            //_entity.eventCollision(entity);
         }
         else{
             _entity.deplacer();

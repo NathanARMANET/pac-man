@@ -2,8 +2,6 @@ package librairie;
 
 import java.util.Observable;
 
-import javafx.scene.Parent;
-import librairie.GraphicalEntity;
 
 public class Entity extends Observable{
 
@@ -12,13 +10,12 @@ public class Entity extends Observable{
     protected double _y;
     protected CollisionBox _hitBox;
     protected GraphicalEntity _graphic;
-    protected Parent _container;
 
-    public String get_name() {
+    public String getName() {
         return _name;
     }
 
-    public void set_name(String _name) {
+    public void setName(String _name) {
         this._name = _name;
     }
 
@@ -39,25 +36,16 @@ public class Entity extends Observable{
     public void setY(double y) {
         _y = y;
     }
-
-    public Parent getContainer() {
-        return _container;
-    }
-
-    public void set_ontainer(Parent container) {
-        this._container = container;
-    }
-
-    public Entity(String name, double x, double y, CollisionBox hitBox, Parent container) {
+    
+    public Entity(String name, double x, double y, CollisionBox hitBox) {
         _name = name;
         _x = x;
         _y = y;
         _hitBox = hitBox;
-        _container = container;
     }
 
-    public Entity(String name, double x, double y, double height, double width, Parent container) {
-        this(name, x, y, new CollisionBox(height, width), container);
+    public Entity(String name, double x, double y, double height, double width) {
+        this(name, x, y, new CollisionBox(height, width));
     }
 
 

@@ -78,36 +78,6 @@ public class Jeu extends Observable implements Runnable {
 
         _tabFantomes = new Fantome[4];
     }
-    
-    @Override
-    public void run() {
-        
-        while(true){
-            // enregistre le temps au début
-            long startTime = System.currentTimeMillis();
-            // réalise tout les calculs et les affichages
-            
-            for (Fantome f : _tabFantomes) f.deplacer();
-            _pacman.changeDirection(_direction);
-            _pacman.deplacer();
-            
-            setChanged();
-            notifyObservers();
-            
-            // calcule le temps écoulé depuis le début
-            long elapsedTime = System.currentTimeMillis() - startTime;
-            // calcule le temps restant pour avoir un affichage 60 image par seconde
-            long remainingTime = (1000 / 60) - elapsedTime;
-            if (remainingTime > 0) {
-                try {
-                    Thread.sleep(remainingTime);
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
-            }
-            
-        }
-    }
 
     public Jeu(Group root){
 
@@ -146,7 +116,7 @@ public class Jeu extends Observable implements Runnable {
         };
 
         _boardManager = new BoardManager();
-
+        _tabFantomes = new Fantome[4];
         Wall w;
         Pacgomme pg;
         SuperPacgomme spg;
@@ -155,7 +125,7 @@ public class Jeu extends Observable implements Runnable {
             for (int j=0 ; j < 31 ; j++) {
                 switch (g[i][j]) {
                     case 8 :
-                        w = new Wall(10+30*j, 40+30*i, 30, 30);
+                        w = new Wall(10+20*j, 40+20*i, 20, 20);
                         _boardManager.addEntity(w.getEntity());
                         root.getChildren().add(w);
                         break;
@@ -166,48 +136,77 @@ public class Jeu extends Observable implements Runnable {
                         root.getChildren().add(pg);
                         break;
 
-                    case 2 :
-                        spg=new SuperPacgomme((20+30*(2*j+1))/2, (80+30*(2*i+1))/2, 10);
-                        _boardManager.addEntity(spg.getEntity());
-                        root.getChildren().add(spg);
-                        break;
+//                    case 2 :
+//                        spg=new SuperPacgomme((20+30*(2*j+1))/2, (80+30*(2*i+1))/2, 10);
+//                        _boardManager.addEntity(spg.getEntity());
+//                        root.getChildren().add(spg);
+//                        break;
 
                     case 3 :
-                        _pacman = new Pacman(10+30*j, 40+30*i, 20, 20, 3);
+                        _pacman = new Pacman(10+20*j, 40+20*i, 20, 20, 1);
+                        _pacman.setBoardManager(_boardManager);
                         _boardManager.addMovableEntity(_pacman.getEntity());
                         root.getChildren().add(_pacman);
                         break;
 
-                    case 4 :
-                        _tabFantomes[0] = new Fantome(10+30*j, 40+30*i, 20, 20, 3, Color.RED);
-                        _boardManager.addMovableEntity(_tabFantomes[0].getEntity());
-                        root.getChildren().add(_tabFantomes[0]);
-                        break;
-
-                    case 5 :
-                        _tabFantomes[1] = new Fantome(10+30*j, 40+30*i, 20, 20, 3, Color.BLUE);
-                        _boardManager.addMovableEntity(_tabFantomes[1].getEntity());
-                        root.getChildren().add(_tabFantomes[1]);
-                        break;
-
-                    case 6 :
-                        _tabFantomes[2] = new Fantome(10+30*j, 40+30*i, 20, 20, 3, Color.PINK);
-                        _boardManager.addMovableEntity(_tabFantomes[2].getEntity());
-                        root.getChildren().add(_tabFantomes[2]);
-                        break;
-
-                    case 7 :
-                        _tabFantomes[3] = new Fantome(10+30*j, 40+30*i, 20, 20, 3, Color.GREEN);
-                        _boardManager.addMovableEntity(_tabFantomes[3].getEntity());
-                        root.getChildren().add(_tabFantomes[3]);
-                        break;
+//                    case 4 :
+//                        _tabFantomes[0] = new Fantome(10+30*j, 40+30*i, 20, 20, 3, Color.RED);
+//                        _boardManager.addMovableEntity(_tabFantomes[0].getEntity());
+//                        root.getChildren().add(_tabFantomes[0]);
+//                        break;
+//
+//                    case 5 :
+//                        _tabFantomes[1] = new Fantome(10+30*j, 40+30*i, 20, 20, 3, Color.BLUE);
+//                        _boardManager.addMovableEntity(_tabFantomes[1].getEntity());
+//                        root.getChildren().add(_tabFantomes[1]);
+//                        break;
+//
+//                    case 6 :
+//                        _tabFantomes[2] = new Fantome(10+30*j, 40+30*i, 20, 20, 3, Color.PINK);
+//                        _boardManager.addMovableEntity(_tabFantomes[2].getEntity());
+//                        root.getChildren().add(_tabFantomes[2]);
+//                        break;
+//
+//                    case 7 :
+//                        _tabFantomes[3] = new Fantome(10+30*j, 40+30*i, 20, 20, 3, Color.GREEN);
+//                        _boardManager.addMovableEntity(_tabFantomes[3].getEntity());
+//                        root.getChildren().add(_tabFantomes[3]);
+//                        break;
 
                     default: break;
 
                 }
             }
         }
-
-
+    }
+    
+    @Override
+    public void run() {
+        
+        while(true){
+            // enregistre le temps au début
+            long startTime = System.currentTimeMillis();
+            // réalise tout les calculs et les affichages
+            
+            //for (Fantome f : _tabFantomes) f.deplacer();
+            _pacman.changeDirection(_direction);
+            _pacman.deplacer();
+            
+            setChanged();
+            notifyObservers();
+            
+            // calcule le temps écoulé depuis le début
+            long elapsedTime = System.currentTimeMillis() - startTime;
+            // calcule le temps restant pour avoir un affichage 60 image par seconde
+            long remainingTime = (1000 / 60) - elapsedTime;
+            if (remainingTime > 0) {
+                try {
+                    Thread.sleep(remainingTime);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            
+        }
     }
 }
