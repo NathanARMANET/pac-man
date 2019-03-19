@@ -67,13 +67,8 @@ public class Main extends Application implements Observer {
 
 
         EventHandler<KeyEvent> keyEventHander = event -> {
-<<<<<<< HEAD
             Direction dir = _jeu.getPacman().getEntity().getDirection();
-            
-=======
-            Direction dir = _jeu.getPacman().getEntity().get_d();
 
->>>>>>> 38d7ffeac031c45bcd19ce4bcdaf6fbccea4710a
             switch (event.getCharacter()) {
                 //deplacement pac-mac
                 case "a" : _jeu.getPacman().changeDirection(Direction.immobile);

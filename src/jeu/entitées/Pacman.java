@@ -14,48 +14,43 @@ import librairie.Direction;
 import librairie.Entity;
 
 public class Pacman extends Parent implements Observer,GraphicalEntity{
-    
+
     private double _startX;
     private double _startY;
     private MovableEntity _entity;
-    private Shape _image;    
-    
+    private Shape _image;
+
     private BoardManager _boardManager;
 
     public MovableEntity getEntity(){
         return _entity;
     }
-    
+
     public Shape getImage(){
         return _image;
     }
-    
+
     public void setBoardManager(BoardManager board){
         _boardManager = board;
     }
-    
+
     public Pacman(double x, double y, double heigth, double width, double speed){
-<<<<<<< HEAD
         _entity = new MovableEntity("pacman", x, y, heigth, width, speed);
         _entity.setGraphicalEntity((GraphicalEntity)this);
-=======
-        _entity = new MovableEntity("pacman", x, y, heigth, width, speed, this);
-        _entity.setGraphicalEntity(this);
->>>>>>> 38d7ffeac031c45bcd19ce4bcdaf6fbccea4710a
         _entity.addObserver(this);
         _image = new Rectangle(x,y,width,heigth);
         _image.setFill(Color.YELLOW);
         this.getChildren().add(_image);
-        
+
     }
-    
+
     public void changeDirection(Direction direction){
         if (direction == null)
             return;
         Direction oldDirection = _entity.getDirection();
         double x = _entity.getX();
         double y = _entity.getY();
-        
+
         _entity.setDirection(direction);
         _entity.deplacer();
         Entity entity = _boardManager.checkCollision(_entity);
@@ -64,12 +59,12 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
         }
         _entity.translate(x, y);
     }
-    
+
     //code cracra
     public void deplacer(){
         Entity entity = _boardManager.upcommingCollision(_entity);
         if(entity != null){
-            
+
             //_entity.eventCollision(entity);
         }
         else{
@@ -82,5 +77,5 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
     public void update(Observable o, Object arg) {
 
     }
-    
+
 }
