@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 import librairie.Direction;
 import java.util.Observable;
 import java.util.Observer;
+import javafx.scene.input.InputEvent;
+import librairie.Direction;
 
 public class Main extends Application implements Observer {
 
@@ -62,9 +64,11 @@ public class Main extends Application implements Observer {
         _life.setY(20);
 
         root.getChildren().add(_life);
-        
-        
+
+
         EventHandler<KeyEvent> keyEventHander = event -> {
+            Direction dir = _jeu.getPacman().getEntity().get_d();
+
             switch (event.getCharacter()) {
                 //deplacement pac-mac
                 case "a" : _jeu.getPacman().changeDirection(Direction.immobile);
@@ -112,7 +116,12 @@ public class Main extends Application implements Observer {
                 case "j" : if (_jeu.get_fantomeJ2() < 4) _jeu.get_fantomes(_jeu.get_fantomeJ2()).changeDirection(Direction.gauche);
                     break;
             }
+            _jeu.setDirection(dir);
         };
+
+        //this.onKeyReleased();
+
+
 
         root.requestFocus();
 
@@ -131,8 +140,8 @@ public class Main extends Application implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        _score.setText("Score : "+ _jeu.get_score());
-        _life.setText("Life : "+ _jeu.get_lives());
+        _score.setText("Score : "+ _jeu.getScore());
+        _life.setText("Life : "+ _jeu.getLives());
     }
 
     public static void main(String[] args) {

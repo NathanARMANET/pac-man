@@ -37,6 +37,19 @@ public class BoardManager {
         }
         return null;
     }
+    
+    public Entity upcommingCollision(MovableEntity originEntity){
+        double x = originEntity.getX();
+        double y = originEntity.getY();
+        originEntity.deplacer();
+        for (Entity entityTested : _entities) {
+            if((originEntity != entityTested) && (originEntity.checkCollision(entityTested))){
+                originEntity.translate(x, y);
+                return entityTested;
+            }
+        }
+        return null;
+    }
 
     public void checkAllCollision(Jeu jeu){
         for(MovableEntity entityTested : _movableEntities){

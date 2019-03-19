@@ -26,6 +26,11 @@ public class MovableEntity extends Entity {
     public MovableEntity(String name, double x, double y, double height, double width, double speed, Parent container) {
         this(name, x, y, new CollisionBox(height, width), speed, container);
     }
+    
+    public MovableEntity(MovableEntity entity){
+        this(entity._name, entity._x ,entity._y, entity._hitBox, entity._speed, entity._container);
+        this._d = entity._d;
+    }
 
     public double get_speed() {
         return _speed;
@@ -112,22 +117,22 @@ public class MovableEntity extends Entity {
                 break;
 
             case "pacgomme" :
-                if (this._name.equals("pacman")) jeu.set_score(jeu.get_score()+10);
+                if (this._name.equals("pacman")) jeu.setScore(jeu.getScore()+10);
                 break;
 
             case "superpacgomme" :
-                if (this._name.equals("pacman")) jeu.set_score(jeu.get_score()+20);
+                if (this._name.equals("pacman")) jeu.setScore(jeu.getScore()+20);
                 break;
 
             case "fantome" :
                 if (this._name.equals("pacman")) {
-                    jeu.set_lives(jeu.get_lives()-1);
+                    jeu.setLives(jeu.getLives()-1);
                     this.setX(this.get_startX());
                     this.setY(this.get_startY());
                 }
                 break;
 
-            case "pacman" : jeu.set_lives(jeu.get_lives()-1);
+            case "pacman" : jeu.setLives(jeu.getLives()-1);
                 break;
 
             default: break;
