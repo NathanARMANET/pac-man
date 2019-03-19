@@ -65,12 +65,15 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
         Entity entity = _boardManager.upcommingCollision(_entity);
         if(entity != null){
 
-            //_entity.eventCollision(entity);
+            GraphicalEntity graphical = entity.getGraphicalEntity();
+            if(graphical instanceof Wall){
+                return;
+            }
+            else if (graphical instanceof Pacgomme) {
+            }
         }
-        else{
             _entity.deplacer();
             super.relocate(_entity.getX(),_entity.getY());
-        }
     }
 
     @Override

@@ -171,7 +171,7 @@ public class Jeu extends Observable implements Runnable {
 //                        break;
 
                     case 8 :
-                        w = new Wall(10+30*j, 40+30*i, 30, 30);
+                        w = new Wall(10+20*j, 40+20*i, 20, 20);
                         _boardManager.addEntity(w.getEntity());
                         root.getChildren().add(w);
                         break;

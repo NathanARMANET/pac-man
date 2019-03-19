@@ -74,4 +74,8 @@ public class Entity extends Observable{
             throw new IllegalArgumentException();
         _graphic = entity;
     }
+    
+    public GraphicalEntity getGraphicalEntity(){
+        return _graphic;
+    }
 }

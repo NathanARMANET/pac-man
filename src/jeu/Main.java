@@ -71,51 +71,52 @@ public class Main extends Application implements Observer {
 
             switch (event.getCharacter()) {
                 //deplacement pac-mac
-                case "a" : _jeu.getPacman().changeDirection(Direction.immobile);
+                case "a" : dir = Direction.immobile;
                     break;
 
-                case "z" : _jeu.getPacman().changeDirection(Direction.haut);
+                case "z" : dir = Direction.haut;
                     break;
 
-                case "d" : _jeu.getPacman().changeDirection(Direction.droite);
+                case "d" : dir = Direction.droite;
                     break;
 
-                case "s" : _jeu.getPacman().changeDirection(Direction.bas);
+                case "s" : dir = Direction.bas;
                     break;
 
-                case "q" : _jeu.getPacman().changeDirection(Direction.gauche);
-                    break;
-
-                //choix fantome
-
-                case "w" : _jeu.set_fantomeJ2(0);
-                    break;
-
-                case "x" : _jeu.set_fantomeJ2(1);
-                    break;
-
-                case "c" : _jeu.set_fantomeJ2(2);
-                    break;
-
-                case "v" : _jeu.set_fantomeJ2(3);
-                    break;
-
-                case "n" : _jeu.set_fantomeJ2(4);
-                    break;
-
-                //deplacement fantome
-                case "i" : if (_jeu.get_fantomeJ2() < 4) _jeu.get_fantomes(_jeu.get_fantomeJ2()).changeDirection(Direction.haut);
-                    break;
-
-                case "l" : if (_jeu.get_fantomeJ2() < 4) _jeu.get_fantomes(_jeu.get_fantomeJ2()).changeDirection(Direction.droite);
-                    break;
-
-                case "k" : if (_jeu.get_fantomeJ2() < 4) _jeu.get_fantomes(_jeu.get_fantomeJ2()).changeDirection(Direction.bas);
-                    break;
-
-                case "j" : if (_jeu.get_fantomeJ2() < 4) _jeu.get_fantomes(_jeu.get_fantomeJ2()).changeDirection(Direction.gauche);
+                case "q" : dir = Direction.gauche;
                     break;
             }
+
+//                //choix fantome
+//
+//                case "w" : _jeu.set_fantomeJ2(0);
+//                    break;
+//
+//                case "x" : _jeu.set_fantomeJ2(1);
+//                    break;
+//
+//                case "c" : _jeu.set_fantomeJ2(2);
+//                    break;
+//
+//                case "v" : _jeu.set_fantomeJ2(3);
+//                    break;
+//
+//                case "n" : _jeu.set_fantomeJ2(4);
+//                    break;
+//
+//                //deplacement fantome
+//                case "i" : if (_jeu.get_fantomeJ2() < 4) _jeu.get_fantomes(_jeu.get_fantomeJ2()).changeDirection(Direction.haut);
+//                    break;
+//
+//                case "l" : if (_jeu.get_fantomeJ2() < 4) _jeu.get_fantomes(_jeu.get_fantomeJ2()).changeDirection(Direction.droite);
+//                    break;
+//
+//                case "k" : if (_jeu.get_fantomeJ2() < 4) _jeu.get_fantomes(_jeu.get_fantomeJ2()).changeDirection(Direction.bas);
+//                    break;
+//
+//                case "j" : if (_jeu.get_fantomeJ2() < 4) _jeu.get_fantomes(_jeu.get_fantomeJ2()).changeDirection(Direction.gauche);
+//                    break;
+//            }
             _jeu.setDirection(dir);
         };
 
@@ -137,6 +138,7 @@ public class Main extends Application implements Observer {
 
         new Thread(_jeu).start();
     }
+
 
     @Override
     public void update(Observable o, Object arg) {
