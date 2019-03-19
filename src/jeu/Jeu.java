@@ -3,19 +3,18 @@ package jeu;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import jeu.entitées.*;
-
 import java.util.Observable;
-
 import librairie.BoardManager;
 
 public class Jeu extends Observable implements Runnable {
     
     private Pacman _pacman;
-    private Fantome _tabFantomes[];
+    private Fantome[] _tabFantomes;
     private BoardManager _boardManager;
     private int _fantomeJ2;
     private int _lives;
     private int _score;
+    private int _scoreTotal;
 
     public Pacman get_pacman() {
         return _pacman;
@@ -65,38 +64,38 @@ public class Jeu extends Observable implements Runnable {
 
         _lives = 3;
         _score = 0;
+        _scoreTotal = 0;
+        _fantomeJ2 = -1;
 
         _tabFantomes = new Fantome[4];
 
         int [][] g = new int[][]{
-                {8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8},
-                {8, 2, 1, 1, 1, 8, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 8},
-                {8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 1, 1, 1, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8},
-                {8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 0, 8, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 0, 8, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 1, 1, 1, 1, 8, 8, 1, 8, 8, 0, 0, 0, 0, 0, 0, 0, 8, 8, 1, 1, 1, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 0, 8, 8, 8, 8, 8, 0, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 0, 8, 8, 0, 0, 8, 0, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 1, 1, 1, 8, 8, 1, 1, 1, 1, 8, 8, 0, 8, 8, 4, 0, 8, 0, 8, 1, 1, 8, 8, 1, 1, 1, 1, 1, 8},
-                {8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 0, 8, 8, 5, 0, 0, 0, 1, 1, 8, 8, 8, 1, 8, 8, 8, 8, 8},
-                {8, 1, 8, 8, 8, 8, 8, 3, 8, 8, 8, 8, 8, 0, 8, 8, 6, 0, 0, 0, 1, 1, 8, 8, 8, 1, 8, 8, 8, 8, 8},
-                {8, 1, 1, 1, 1, 8, 8, 1, 1, 1, 1, 8, 8, 0, 8, 8, 7, 0, 8, 0, 8, 1, 1, 8, 8, 1, 1, 1, 1, 1, 8},
-                {8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 0, 8, 8, 0, 0, 8, 0, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 0, 8, 8, 8, 8, 8, 0, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 1, 1, 1, 1, 8, 8, 1, 8, 8, 0, 0, 0, 0, 0, 0, 0, 8, 8, 1, 1, 1, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 0, 8, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 0, 8, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8},
-                {8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 1, 1, 1, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 2, 1, 1, 1, 8, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 8},
-                {8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8}
+                {8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8},
+                {8, 2, 1, 1, 1, 8, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 8},
+                {8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
+                {8, 1, 8, 8, 1, 1, 1, 1, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
+                {8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
+                {8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
+                {8, 1, 8, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8},
+                {8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 0, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 1, 8},
+                {8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 0, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 1, 8},
+                {8, 1, 8, 8, 1, 1, 1, 1, 8, 8, 1, 8, 8, 0, 0, 0, 0, 0, 8, 8, 1, 1, 1, 1, 8, 8, 8, 1, 8},
+                {8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 0, 8, 8, 8, 0, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
+                {8, 1, 1, 1, 1, 8, 8, 1, 1, 1, 1, 8, 8, 0, 8, 4, 8, 0, 8, 1, 1, 8, 8, 1, 1, 1, 1, 1, 8},
+                {8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 0, 8, 5, 0, 0, 0, 1, 8, 8, 8, 1, 8, 8, 8, 8, 8},
+                {8, 1, 8, 8, 8, 8, 8, 3, 8, 8, 8, 8, 8, 0, 8, 6, 0, 0, 0, 1, 8, 8, 8, 1, 8, 8, 8, 8, 8},
+                {8, 1, 1, 1, 1, 8, 8, 1, 1, 1, 1, 8, 8, 0, 8, 7, 8, 0, 8, 1, 1, 8, 8, 1, 1, 1, 1, 1, 8},
+                {8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 0, 8, 8, 8, 0, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
+                {8, 1, 8, 8, 1, 1, 1, 1, 8, 8, 1, 8, 8, 0, 0, 0, 0, 0, 8, 8, 1, 1, 1, 1, 8, 8, 8, 1, 8},
+                {8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 0, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 1, 8},
+                {8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 0, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 1, 8},
+                {8, 1, 8, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8},
+                {8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
+                {8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
+                {8, 1, 8, 8, 1, 1, 1, 1, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
+                {8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
+                {8, 2, 1, 1, 1, 8, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 8},
+                {8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8}
         };
 
         _boardManager = new BoardManager();
@@ -105,23 +104,20 @@ public class Jeu extends Observable implements Runnable {
         Pacgomme pg;
         SuperPacgomme spg;
 
-        for (int i=0; i< 28; i++) {
-            for (int j=0 ; j < 31 ; j++) {
+        for (int i=0; i< 26; i++) {
+            for (int j=0 ; j < 29 ; j++) {
                 switch (g[i][j]) {
-                    case 8 :
-                        w = new Wall(10+30*j, 40+30*i, 30, 30);
-                        _boardManager.addEntity(w.getEntity());
-                        root.getChildren().add(w);
-                        break;
 
                     case 1 :
-                        pg = new Pacgomme((20+30*(2*j+1))/2, (80+30*(2*i+1))/2, 5);
+                        _scoreTotal += 10;
+                        pg = new Pacgomme((20+30*(2*(float)j+1))/2, (80+30*(2*(float)i+1))/2, 5);
                         _boardManager.addEntity(pg.getEntity());
                         root.getChildren().add(pg);
                         break;
 
                     case 2 :
-                        spg=new SuperPacgomme((20+30*(2*j+1))/2, (80+30*(2*i+1))/2, 10);
+                        _scoreTotal += 20;
+                        spg=new SuperPacgomme((20+30*(2*(float)j+1))/2, (80+30*(2*(float)i+1))/2, 10);
                         _boardManager.addEntity(spg.getEntity());
                         root.getChildren().add(spg);
                         break;
@@ -133,27 +129,33 @@ public class Jeu extends Observable implements Runnable {
                         break;
 
                     case 4 :
-                        _tabFantomes[0] = new Fantome(10+30*j, 40+30*i, 20, 20, 3, Color.RED);
+                        _tabFantomes[0] = new Fantome(10+30*j, 40+30*i, 30, 30, 3, Color.RED);
                         _boardManager.addMovableEntity(_tabFantomes[0].getEntity());
                         root.getChildren().add(_tabFantomes[0]);
                         break;
 
                     case 5 :
-                        _tabFantomes[1] = new Fantome(10+30*j, 40+30*i, 20, 20, 3, Color.BLUE);
+                        _tabFantomes[1] = new Fantome(10+30*j, 40+30*i, 30, 30, 3, Color.BLUE);
                         _boardManager.addMovableEntity(_tabFantomes[1].getEntity());
                         root.getChildren().add(_tabFantomes[1]);
                         break;
 
                     case 6 :
-                        _tabFantomes[2] = new Fantome(10+30*j, 40+30*i, 20, 20, 3, Color.PINK);
+                        _tabFantomes[2] = new Fantome(10+30*j, 40+30*i, 30, 30, 3, Color.PINK);
                         _boardManager.addMovableEntity(_tabFantomes[2].getEntity());
                         root.getChildren().add(_tabFantomes[2]);
                         break;
 
                     case 7 :
-                        _tabFantomes[3] = new Fantome(10+30*j, 40+30*i, 20, 20, 3, Color.GREEN);
+                        _tabFantomes[3] = new Fantome(10+30*j, 40+30*i, 30, 30, 3, Color.GREEN);
                         _boardManager.addMovableEntity(_tabFantomes[3].getEntity());
                         root.getChildren().add(_tabFantomes[3]);
+                        break;
+
+                    case 8 :
+                        w = new Wall(10+30*j, 40+30*i, 30, 30);
+                        _boardManager.addEntity(w.getEntity());
+                        root.getChildren().add(w);
                         break;
 
                     default: break;
@@ -161,15 +163,16 @@ public class Jeu extends Observable implements Runnable {
                 }
             }
         }
-
-
     }
     
     @Override
     public void run() {
         
-        while(true){
-            for (Fantome f : _tabFantomes) f.deplacer();
+        while(_lives > 0 && _score < _scoreTotal){
+            /*for (int i = 0 ; i < 4 ; i++) {
+                if (i == _fantomeJ2) _tabFantomes[i].deplacer();
+                else _tabFantomes[i].deplacerRandom();
+            }*/
             _pacman.deplacer();
             _boardManager.checkAllCollision(this);
             setChanged();
@@ -180,6 +183,5 @@ public class Jeu extends Observable implements Runnable {
                 ex.printStackTrace();
             }
         }
-
     }
 }

@@ -4,7 +4,6 @@ import javafx.scene.Parent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
-import librairie.CollisionBox;
 import librairie.Direction;
 import librairie.GraphicalEntity;
 import librairie.MovableEntity;
@@ -26,7 +25,7 @@ public class Fantome extends Parent implements Observer, GraphicalEntity {
 
     public Fantome(double x, double y, double heigth, double width, double speed, Color color){
         _entity = new MovableEntity("fantome", x, y, heigth, width, speed, this);
-        _entity.setGraphicalEntity((GraphicalEntity)this);
+        _entity.setGraphicalEntity(this);
         _entity.addObserver(this);
         _image = new Rectangle(x,y,width,heigth);
         _image.setFill(color);
@@ -40,7 +39,35 @@ public class Fantome extends Parent implements Observer, GraphicalEntity {
     }
 
     public void deplacer(){
-        if (_entity.get_d() == Direction.immobile) _entity.set_d(Direction.randomDirection());
+        _entity.deplacer();
+        super.relocate(_entity.getX(),_entity.getY());
+    }
+
+    public void deplacerRandom(){
+        if (_entity.get_d() == Direction.immobile) {
+            Direction impossible;
+            switch (_entity.get_previousDirection()) {
+                case haut: impossible = Direction.bas;
+                break;
+
+                case bas: impossible = Direction.haut;
+                break;
+
+                case droite: impossible = Direction.gauche;
+                break;
+
+                case gauche: impossible = Direction.droite;
+                break;
+
+                default: impossible = Direction.immobile;
+                break;
+            }
+
+            do {
+                _entity.set_d(Direction.randomDirection());
+            }while (_entity.get_d() == impossible);
+
+        }
         _entity.deplacer();
         super.relocate(_entity.getX(),_entity.getY());
     }

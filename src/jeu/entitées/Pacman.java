@@ -25,7 +25,7 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
     
     public Pacman(double x, double y, double heigth, double width, double speed){
         _entity = new MovableEntity("pacman", x, y, heigth, width, speed, this);
-        _entity.setGraphicalEntity((GraphicalEntity)this);
+        _entity.setGraphicalEntity(this);
         _entity.addObserver(this);
         _image = new Rectangle(x,y,width,heigth);
         _image.setFill(Color.YELLOW);

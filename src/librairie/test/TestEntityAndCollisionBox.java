@@ -41,7 +41,7 @@ public class TestEntityAndCollisionBox extends Application{
             public void run() {
                 for (int i = 0; i < 10000; i++) {
                     if(!lst.get(0).checkCollision(lst.get(1)))
-                        ((GraphicalEntityTest)lst.get(0)).translateY(i);
+                        lst.get(0).translateY(i);
                     
                     try {
                         Thread.sleep(40);

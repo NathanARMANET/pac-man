@@ -12,12 +12,14 @@ public class MovableEntity extends Entity {
     private double _startY;
     private double _speed;
     private Direction _d;
+    private Direction _previousDirection;
 
     public MovableEntity(String name, double x, double y, CollisionBox hitBox, double speed, Parent container) {
         super(name, x, y, hitBox, container);
         _startX = x;
         _startY = y;
         _d = Direction.immobile;
+        _previousDirection = Direction.immobile;
         _speed = speed;
     }
 
@@ -39,6 +41,14 @@ public class MovableEntity extends Entity {
 
     public void set_d(Direction _d) {
         this._d = _d;
+    }
+
+    public Direction get_previousDirection() {
+        return _previousDirection;
+    }
+
+    public void set_previousDirection(Direction _previousDirection) {
+        this._previousDirection = _previousDirection;
     }
 
     public double get_startX() {
@@ -97,6 +107,7 @@ public class MovableEntity extends Entity {
 
                     default: break;
                 }
+                this._previousDirection = this._d;
                 this._d = Direction.immobile;
                 break;
 
