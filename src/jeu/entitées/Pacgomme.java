@@ -29,4 +29,8 @@ public class Pacgomme extends Parent implements GraphicalEntity{
         this.getChildren().add(_image);
         _entity.setGraphicalEntity(this);
     }
+    
+    public void delete(){
+        
+    }
 }

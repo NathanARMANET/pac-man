@@ -34,7 +34,7 @@ public class Entity extends Observable{
     public void setY(double y) {
         _y = y;
     }
-    
+
     public Entity(String name, double x, double y, CollisionBox hitBox) {
         _name = name;
         _x = x;
@@ -64,7 +64,7 @@ public class Entity extends Observable{
             || (_y >= obj._y + obj._hitBox.getHeight())
             || (_y + _hitBox.getHeight() <= obj._y));
     }
-    
+
     public void setGraphicalEntity(GraphicalEntity entity){
         if (entity == null)
             throw new IllegalArgumentException();

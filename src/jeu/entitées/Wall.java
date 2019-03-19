@@ -36,4 +36,6 @@ public class Wall extends Parent implements GraphicalEntity {
         _entity.setGraphicalEntity(this);
         this.getChildren().add(_image);
     }
+    
+    
 }

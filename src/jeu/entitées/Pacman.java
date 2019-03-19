@@ -74,10 +74,8 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
                 _boardManager.removeEntity(entity);
             }
         }
-        else{
             _entity.deplacer();
             super.relocate(_entity.getX(),_entity.getY());
-        }
     }
 
     @Override

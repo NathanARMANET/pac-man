@@ -137,6 +137,7 @@ public class Main extends Application implements Observer {
         new Thread(_jeu).start();
     }
 
+
     @Override
     public void update(Observable o, Object arg) {
         _score.setText("Score : "+ _jeu.getScore());
