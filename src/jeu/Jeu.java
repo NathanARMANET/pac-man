@@ -1,12 +1,10 @@
 package jeu;
 
 import javafx.scene.Group;
-import javafx.scene.paint.Color;
 import jeu.entitées.*;
 import java.util.Observable;
 import librairie.BoardManager;
 import librairie.Direction;
-import librairie.Entity;
 
 public class Jeu extends Observable implements Runnable {
 
@@ -133,11 +131,12 @@ public class Jeu extends Observable implements Runnable {
                         root.getChildren().add(pg);
                         break;
 
-//                    case 2 :
-//                        spg=new SuperPacgomme((20+30*(2*j+1))/2, (80+30*(2*i+1))/2, 10);
-//                        _boardManager.addEntity(spg.getEntity());
-//                        root.getChildren().add(spg);
-//                        break;
+                    case 2 :
+                        _scoreTotal += 20;
+                        spg=new SuperPacgomme((20+25*(2*(float)j+1))/2, (80+25*(2*(float)i+1))/2, 10);
+                        _boardManager.addEntity(spg.getEntity());
+                        root.getChildren().add(spg);
+                        break;
 
                     case 3 :
                         _pacman = new Pacman(10+25*j, 40+25*i, 25, 25, 1);
@@ -186,7 +185,7 @@ public class Jeu extends Observable implements Runnable {
     @Override
     public void run() {
 
-        while(true){
+        while(_lives > 0 && _score < _scoreTotal) {
             // enregistre le temps au début
             long startTime = System.currentTimeMillis();
             // réalise tout les calculs et les affichages
@@ -201,7 +200,7 @@ public class Jeu extends Observable implements Runnable {
             // calcule le temps écoulé depuis le début
             long elapsedTime = System.currentTimeMillis() - startTime;
             // calcule le temps restant pour avoir un affichage 60 image par seconde
-            long remainingTime = (1000 / 60) - elapsedTime;
+            long remainingTime = (1000 / 120) - elapsedTime;
             if (remainingTime > 0) {
                 try {
                     Thread.sleep(remainingTime);

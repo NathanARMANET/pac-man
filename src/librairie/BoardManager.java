@@ -38,13 +38,14 @@ public class BoardManager {
         double x = originEntity.getX();
         double y = originEntity.getY();
         originEntity.deplacer();
+        Entity tmp = null;
         for (Entity entityTested : _entities) {
             if((originEntity != entityTested) && (originEntity.checkCollision(entityTested))){
-                originEntity.translate(x, y);
-                return entityTested;
+                tmp = entityTested;
             }
         }
-        return null;
+        originEntity.translate(x, y);
+        return tmp;
     }
 
     public void checkAllCollision(){

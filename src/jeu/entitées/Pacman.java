@@ -7,7 +7,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import librairie.BoardManager;
-import librairie.CollisionBox;
 import librairie.GraphicalEntity;
 import librairie.MovableEntity;
 import librairie.Direction;
@@ -55,7 +54,7 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
         _entity.setDirection(direction);
         _entity.deplacer();
         Entity entity = _boardManager.checkCollision(_entity);
-        if(entity != null && !(entity.getGraphicalEntity() instanceof Pacgomme)) {
+        if(entity != null /*&& !(entity.getGraphicalEntity() instanceof Pacgomme)*/) {
             _entity.setDirection(oldDirection);
         }
         _entity.translate(x, y);
@@ -67,8 +66,13 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
         if(entity != null){
 
             GraphicalEntity g = entity.getGraphicalEntity();
-            if (g instanceof Wall) _entity.setDirection(Direction.immobile);
-            else if (g instanceof Pacgomme) {
+            if (g instanceof Wall) {
+                _entity.setDirection(Direction.immobile);
+            } else if (g instanceof SuperPacgomme) {
+                j.setScore(j.getScore()+20);
+                ((Pacgomme) g).getImage().setFill(Color.TRANSPARENT);
+                _boardManager.removeEntity(entity);
+            } else if (g instanceof Pacgomme) {
                 j.setScore(j.getScore()+10);
                 ((Pacgomme) g).getImage().setFill(Color.TRANSPARENT);
                 _boardManager.removeEntity(entity);

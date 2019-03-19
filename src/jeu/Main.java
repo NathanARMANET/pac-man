@@ -10,8 +10,6 @@ import javafx.stage.Stage;
 import librairie.Direction;
 import java.util.Observable;
 import java.util.Observer;
-import javafx.scene.input.InputEvent;
-import librairie.Direction;
 
 public class Main extends Application implements Observer {
 
@@ -67,7 +65,6 @@ public class Main extends Application implements Observer {
 
 
         EventHandler<KeyEvent> keyEventHander = event -> {
-            Direction dir = _jeu.getPacman().getEntity().getDirection();
 
             switch (event.getCharacter()) {
                 //deplacement pac-mac

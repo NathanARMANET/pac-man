@@ -7,7 +7,6 @@ import javafx.scene.shape.Shape;
 import librairie.Direction;
 import librairie.GraphicalEntity;
 import librairie.MovableEntity;
-
 import java.util.Observable;
 import java.util.Observer;
 
