@@ -30,7 +30,7 @@ public class Wall extends Parent{
     }
     
     public Wall(double x, double y, double heigth, double width){
-        _entity = new Entity(x, y, heigth, width);
+        _entity = new Entity("wall", x, y, heigth, width, this);
         _image = new Rectangle(x,y,width,heigth);
         _image.setFill(Color.BROWN);
         this.getChildren().add(_image);

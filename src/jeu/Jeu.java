@@ -1,16 +1,14 @@
 package jeu;
 
 import javafx.scene.Group;
-import jeu.entitées.Fantome;
-import jeu.entitées.Pacman;
+import javafx.scene.paint.Color;
+import jeu.entitées.*;
 
 import java.util.Observable;
-import jeu.entitées.Pacman;
-import jeu.entitées.Wall;
+
 import librairie.BoardManager;
 import librairie.Direction;
 import librairie.Entity;
-
 
 public class Jeu extends Observable implements Runnable {
     
@@ -75,6 +73,10 @@ public class Jeu extends Observable implements Runnable {
         _boardManager.addMovableEntity(_pacman.getEntity());
         
         _pacman.setBoardManager(_boardManager);
+        
+        
+
+        _tabFantomes = new Fantome[4];
     }
     
     @Override
@@ -84,8 +86,13 @@ public class Jeu extends Observable implements Runnable {
             // enregistre le temps au début
             long startTime = System.currentTimeMillis();
             // réalise tout les calculs et les affichages
+            
+            for (Fantome f : _tabFantomes) f.deplacer();
             _pacman.changeDirection(_direction);
             _pacman.deplacer();
+            
+            setChanged();
+            notifyObservers();
             
             // calcule le temps écoulé depuis le début
             long elapsedTime = System.currentTimeMillis() - startTime;
@@ -100,13 +107,16 @@ public class Jeu extends Observable implements Runnable {
             }
             
         }
-
     }
 
-    public void initGrille(Group root) {
+    public Jeu(Group root){
+
+        _lives = 3;
+        _score = 0;
+        
         int [][] g = new int[][]{
                 {8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8},
-                {8, 2, 1, 1, 1, 8, 8, 1, 1, 1, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 1, 1, 1, 1, 1, 1, 1, 2, 8},
+                {8, 2, 1, 1, 1, 8, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 8},
                 {8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
                 {8, 1, 8, 8, 1, 1, 1, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
                 {8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
@@ -117,10 +127,10 @@ public class Jeu extends Observable implements Runnable {
                 {8, 1, 8, 8, 1, 1, 1, 1, 8, 8, 1, 8, 8, 0, 0, 0, 0, 0, 0, 0, 8, 8, 1, 1, 1, 1, 8, 8, 8, 1, 8},
                 {8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 0, 8, 8, 8, 8, 8, 0, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
                 {8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 0, 8, 8, 0, 0, 8, 0, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 1, 1, 1, 8, 8, 1, 1, 1, 1, 8, 8, 0, 8, 8, 0, 0, 8, 0, 8, 1, 1, 8, 8, 1, 1, 1, 1, 1, 8},
-                {8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 0, 8, 8, 0, 0, 0, 0, 1, 1, 8, 8, 8, 1, 8, 8, 8, 8, 8},
-                {8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 0, 8, 8, 0, 0, 0, 0, 1, 1, 8, 8, 8, 1, 8, 8, 8, 8, 8},
-                {8, 1, 1, 1, 1, 8, 8, 1, 1, 1, 1, 8, 8, 0, 8, 8, 0, 0, 8, 0, 8, 1, 1, 8, 8, 1, 1, 1, 1, 1, 8},
+                {8, 1, 1, 1, 1, 8, 8, 1, 1, 1, 1, 8, 8, 0, 8, 8, 4, 0, 8, 0, 8, 1, 1, 8, 8, 1, 1, 1, 1, 1, 8},
+                {8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 0, 8, 8, 5, 0, 0, 0, 1, 1, 8, 8, 8, 1, 8, 8, 8, 8, 8},
+                {8, 1, 8, 8, 8, 8, 8, 3, 8, 8, 8, 8, 8, 0, 8, 8, 6, 0, 0, 0, 1, 1, 8, 8, 8, 1, 8, 8, 8, 8, 8},
+                {8, 1, 1, 1, 1, 8, 8, 1, 1, 1, 1, 8, 8, 0, 8, 8, 7, 0, 8, 0, 8, 1, 1, 8, 8, 1, 1, 1, 1, 1, 8},
                 {8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 0, 8, 8, 0, 0, 8, 0, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
                 {8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 0, 8, 8, 8, 8, 8, 0, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
                 {8, 1, 8, 8, 1, 1, 1, 1, 8, 8, 1, 8, 8, 0, 0, 0, 0, 0, 0, 0, 8, 8, 1, 1, 1, 1, 8, 8, 8, 1, 8},
@@ -131,20 +141,65 @@ public class Jeu extends Observable implements Runnable {
                 {8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
                 {8, 1, 8, 8, 1, 1, 1, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
                 {8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 2, 1, 1, 1, 8, 8, 1, 1, 1, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 1, 1, 1, 1, 1, 1, 1, 2, 8},
+                {8, 2, 1, 1, 1, 8, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 8},
                 {8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8}
         };
 
+        _boardManager = new BoardManager();
 
         Wall w;
+        Pacgomme pg;
+        SuperPacgomme spg;
 
         for (int i=0; i< 28; i++) {
             for (int j=0 ; j < 31 ; j++) {
                 switch (g[i][j]) {
                     case 8 :
-                        w = new Wall(40+20*j, 40+20*i, 20, 20);
+                        w = new Wall(10+30*j, 40+30*i, 30, 30);
                         _boardManager.addEntity(w.getEntity());
                         root.getChildren().add(w);
+                        break;
+
+                    case 1 :
+                        pg = new Pacgomme((20+30*(2*j+1))/2, (80+30*(2*i+1))/2, 5);
+                        _boardManager.addEntity(pg.getEntity());
+                        root.getChildren().add(pg);
+                        break;
+
+                    case 2 :
+                        spg=new SuperPacgomme((20+30*(2*j+1))/2, (80+30*(2*i+1))/2, 10);
+                        _boardManager.addEntity(spg.getEntity());
+                        root.getChildren().add(spg);
+                        break;
+
+                    case 3 :
+                        _pacman = new Pacman(10+30*j, 40+30*i, 20, 20, 3);
+                        _boardManager.addMovableEntity(_pacman.getEntity());
+                        root.getChildren().add(_pacman);
+                        break;
+
+                    case 4 :
+                        _tabFantomes[0] = new Fantome(10+30*j, 40+30*i, 20, 20, 3, Color.RED);
+                        _boardManager.addMovableEntity(_tabFantomes[0].getEntity());
+                        root.getChildren().add(_tabFantomes[0]);
+                        break;
+
+                    case 5 :
+                        _tabFantomes[1] = new Fantome(10+30*j, 40+30*i, 20, 20, 3, Color.BLUE);
+                        _boardManager.addMovableEntity(_tabFantomes[1].getEntity());
+                        root.getChildren().add(_tabFantomes[1]);
+                        break;
+
+                    case 6 :
+                        _tabFantomes[2] = new Fantome(10+30*j, 40+30*i, 20, 20, 3, Color.PINK);
+                        _boardManager.addMovableEntity(_tabFantomes[2].getEntity());
+                        root.getChildren().add(_tabFantomes[2]);
+                        break;
+
+                    case 7 :
+                        _tabFantomes[3] = new Fantome(10+30*j, 40+30*i, 20, 20, 3, Color.GREEN);
+                        _boardManager.addMovableEntity(_tabFantomes[3].getEntity());
+                        root.getChildren().add(_tabFantomes[3]);
                         break;
 
                     default: break;
@@ -152,5 +207,7 @@ public class Jeu extends Observable implements Runnable {
                 }
             }
         }
+
+
     }
 }

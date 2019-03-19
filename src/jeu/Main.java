@@ -23,15 +23,12 @@ public class Main extends Application implements Observer {
 
     @Override
     public void start(Stage primaryStage) {
-        _jeu = new Jeu();
 
         primaryStage.setTitle("Pac Man");
 
         Group root = new Group();
 
-        root.getChildren().add(_jeu.getPacman());
-
-        _jeu.initGrille(root);
+        _jeu = new Jeu(root);
 
 
         Text consigne = new Text();
@@ -51,7 +48,7 @@ public class Main extends Application implements Observer {
                 "- c -> fantome Rose\n" +
                 "- v -> fantome Vert\n" +
                 "- n -> pas de fantome\n");
-        consigne.setX(800);
+        consigne.setX(950);
         consigne.setY(40);
 
         root.getChildren().add(consigne);
@@ -85,6 +82,37 @@ public class Main extends Application implements Observer {
 
                 case "q" : dir =  Direction.gauche;
                     break;
+
+                //choix fantome
+                /*
+                case "w" : _jeu.set_fantomeJ2(0);
+                    break;
+
+                case "x" : _jeu.set_fantomeJ2(1);
+                    break;
+
+                case "c" : _jeu.set_fantomeJ2(2);
+                    break;
+
+                case "v" : _jeu.set_fantomeJ2(3);
+                    break;
+
+                case "n" : _jeu.set_fantomeJ2(4);
+                    break;
+
+                //deplacement fantome
+                case "i" : if (_jeu.get_fantomeJ2() < 4) _jeu.get_fantomes(_jeu.get_fantomeJ2()).changeDirection(Direction.haut);
+                    break;
+
+                case "l" : if (_jeu.get_fantomeJ2() < 4) _jeu.get_fantomes(_jeu.get_fantomeJ2()).changeDirection(Direction.droite);
+                    break;
+
+                case "k" : if (_jeu.get_fantomeJ2() < 4) _jeu.get_fantomes(_jeu.get_fantomeJ2()).changeDirection(Direction.bas);
+                    break;
+
+                case "j" : if (_jeu.get_fantomeJ2() < 4) _jeu.get_fantomes(_jeu.get_fantomeJ2()).changeDirection(Direction.gauche);
+                    break;
+                    */
             }
             _jeu.setDirection(dir);
         };
@@ -95,7 +123,7 @@ public class Main extends Application implements Observer {
 
         root.requestFocus();
 
-        primaryStage.setScene(new Scene(root, 1000, 800));
+        primaryStage.setScene(new Scene(root, 1200, 1000));
 
         primaryStage.addEventHandler(KeyEvent.KEY_TYPED, keyEventHander);
 
@@ -110,7 +138,8 @@ public class Main extends Application implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-
+        _score.setText("Score : "+ _jeu.getScore());
+        _life.setText("Life : "+ _jeu.getLives());
     }
 
     public static void main(String[] args) {

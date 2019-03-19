@@ -22,11 +22,11 @@ public class GraphicalEntityTest extends Parent{
         return entity;
     } 
     
-    public GraphicalEntityTest(double x, double y, double heigth, double width ){
+    public GraphicalEntityTest(String name, double x, double y, double heigth, double width ){
         
         // bug collinsion
         Rectangle rect = new Rectangle(x,y,width,heigth);
-        entity = new Entity(x,y,heigth,width);
+        entity = new Entity(name, x,y,heigth,width, this);
         // on ajoute le rectangle au groupe
         this.getChildren().add(rect);
     }    
