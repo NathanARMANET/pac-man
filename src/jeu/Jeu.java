@@ -128,7 +128,7 @@ public class Jeu extends Observable implements Runnable {
 
                     case 1 :
                         _scoreTotal += 10;
-                        pg = new Pacgomme((20+30*(2*(float)j+1))/2, (80+30*(2*(float)i+1))/2, 5);
+                        pg = new Pacgomme((20+25*(2*(float)j+1))/2, (80+25*(2*(float)i+1))/2, 5);
                         _boardManager.addEntity(pg.getEntity());
                         root.getChildren().add(pg);
                         break;
@@ -140,7 +140,7 @@ public class Jeu extends Observable implements Runnable {
 //                        break;
 
                     case 3 :
-                        _pacman = new Pacman(10+20*j, 40+20*i, 20, 20, 1);
+                        _pacman = new Pacman(10+25*j, 40+25*i, 25, 25, 1);
                         _pacman.setBoardManager(_boardManager);
                         _boardManager.addMovableEntity(_pacman.getEntity());
                         root.getChildren().add(_pacman);
@@ -171,7 +171,7 @@ public class Jeu extends Observable implements Runnable {
 //                        break;
 
                     case 8 :
-                        w = new Wall(10+30*j, 40+30*i, 30, 30);
+                        w = new Wall(10+25*j, 40+25*i, 25, 25);
                         _boardManager.addEntity(w.getEntity());
                         root.getChildren().add(w);
                         break;
@@ -193,7 +193,7 @@ public class Jeu extends Observable implements Runnable {
 
             //for (Fantome f : _tabFantomes) f.deplacer();
             _pacman.changeDirection(_direction);
-            _pacman.deplacer();
+            _pacman.deplacer(this);
 
             setChanged();
             notifyObservers();

@@ -12,6 +12,7 @@ import librairie.GraphicalEntity;
 import librairie.MovableEntity;
 import librairie.Direction;
 import librairie.Entity;
+import jeu.Jeu;
 
 public class Pacman extends Parent implements Observer,GraphicalEntity{
 
@@ -54,18 +55,24 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
         _entity.setDirection(direction);
         _entity.deplacer();
         Entity entity = _boardManager.checkCollision(_entity);
-        if(entity != null){
+        if(entity != null && !(entity.getGraphicalEntity() instanceof Pacgomme)) {
             _entity.setDirection(oldDirection);
         }
         _entity.translate(x, y);
     }
 
     //code cracra
-    public void deplacer(){
+    public void deplacer(Jeu j){
         Entity entity = _boardManager.upcommingCollision(_entity);
         if(entity != null){
 
-            //_entity.eventCollision(entity);
+            GraphicalEntity g = entity.getGraphicalEntity();
+            if (g instanceof Wall) _entity.setDirection(Direction.immobile);
+            else if (g instanceof Pacgomme) {
+                j.setScore(j.getScore()+10);
+                ((Pacgomme) g).getImage().setFill(Color.TRANSPARENT);
+                _boardManager.removeEntity(entity);
+            }
         }
         else{
             _entity.deplacer();

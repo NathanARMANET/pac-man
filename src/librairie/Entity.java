@@ -27,11 +27,9 @@ public class Entity extends Observable{
         return _y;
     }
 
-
     public void setX(double x) {
         _x = x;
     }
-
 
     public void setY(double y) {
         _y = y;
@@ -48,12 +46,10 @@ public class Entity extends Observable{
         this(name, x, y, new CollisionBox(height, width));
     }
 
-
     public void translate(double x, double y) {
         _x = x;
         _y = y;
     }
-
 
     public boolean checkCollision(Entity obj) {
         /**
@@ -73,5 +69,9 @@ public class Entity extends Observable{
         if (entity == null)
             throw new IllegalArgumentException();
         _graphic = entity;
+    }
+
+    public GraphicalEntity getGraphicalEntity() {
+        return _graphic;
     }
 }

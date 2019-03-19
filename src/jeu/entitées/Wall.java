@@ -10,12 +10,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import librairie.Entity;
+import librairie.GraphicalEntity;
 
 /**
  *
  * @author thiti
  */
-public class Wall extends Parent implements GraphicalEntity{
+public class Wall extends Parent implements GraphicalEntity {
     
     private Entity _entity;
     private Shape _image;             
