@@ -11,7 +11,6 @@ public class Jeu extends Observable implements Runnable {
 
     private Pacman _pacman;
     private Fantome[] _tabFantomes;
-    private BoardManager _boardManager;
     private Direction _directionPacman;
     private Direction _directionFantomeJ2;
     private int _fantomeJ2;
@@ -105,7 +104,7 @@ public class Jeu extends Observable implements Runnable {
                 {8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8}
         };
 
-        _boardManager = new BoardManager();
+        BoardManager boardManager = new BoardManager();
         _tabFantomes = new Fantome[4];
         Wall w;
         Pacgomme pg;
@@ -118,57 +117,57 @@ public class Jeu extends Observable implements Runnable {
                     case 1 :
                         _scoreTotal += 10;
                         pg = new Pacgomme((20+25*(2*(float)j+1))/2, (80+25*(2*(float)i+1))/2, 5);
-                        _boardManager.addEntity(pg.getEntity());
+                        boardManager.addEntity(pg.getEntity());
                         root.getChildren().add(pg);
                         break;
 
                     case 2 :
                         _scoreTotal += 20;
                         spg=new SuperPacgomme((20+25*(2*(float)j+1))/2, (80+25*(2*(float)i+1))/2, 10);
-                        _boardManager.addEntity(spg.getEntity());
+                        boardManager.addEntity(spg.getEntity());
                         root.getChildren().add(spg);
                         break;
 
                     case 3 :
                         _pacman = new Pacman(10+25*j, 40+25*i, 25, 25, 1);
-                        _pacman.setBoardManager(_boardManager);
-                        _boardManager.addMovableEntity(_pacman.getEntity());
+                        _pacman.setBoardManager(boardManager);
+                        boardManager.addMovableEntity(_pacman.getEntity());
                         root.getChildren().add(_pacman);
                         break;
 
 
                     case 4 :
                         _tabFantomes[0] = new Fantome(10+25*j, 40+25*i, 25, 25, 1, Color.RED);
-                        _tabFantomes[0].setBoardManager(_boardManager);
-                        _boardManager.addMovableEntity(_tabFantomes[0].getEntity());
+                        _tabFantomes[0].setBoardManager(boardManager);
+                        boardManager.addMovableEntity(_tabFantomes[0].getEntity());
                         root.getChildren().add(_tabFantomes[0]);
                         break;
 
                     case 5 :
                         _tabFantomes[1] = new Fantome(10+25*j, 40+25*i, 25, 25, 1, Color.BLUE);
-                        _tabFantomes[1].setBoardManager(_boardManager);
-                        _boardManager.addMovableEntity(_tabFantomes[1].getEntity());
+                        _tabFantomes[1].setBoardManager(boardManager);
+                        boardManager.addMovableEntity(_tabFantomes[1].getEntity());
                         root.getChildren().add(_tabFantomes[1]);
                         break;
 
 
                     case 6 :
                         _tabFantomes[2] = new Fantome(10+25*j, 40+25*i, 25, 25, 1, Color.PINK);
-                        _tabFantomes[2].setBoardManager(_boardManager);
-                        _boardManager.addMovableEntity(_tabFantomes[2].getEntity());
+                        _tabFantomes[2].setBoardManager(boardManager);
+                        boardManager.addMovableEntity(_tabFantomes[2].getEntity());
                         root.getChildren().add(_tabFantomes[2]);
                         break;
 
                     case 7 :
                         _tabFantomes[3] = new Fantome(10+25*j, 40+25*i, 25, 25, 1, Color.GREEN);
-                        _tabFantomes[3].setBoardManager(_boardManager);
-                        _boardManager.addMovableEntity(_tabFantomes[3].getEntity());
+                        _tabFantomes[3].setBoardManager(boardManager);
+                        boardManager.addMovableEntity(_tabFantomes[3].getEntity());
                         root.getChildren().add(_tabFantomes[3]);
                         break;
 
                     case 8 :
                         w = new Wall(10+25*j, 40+25*i, 25, 25);
-                        _boardManager.addEntity(w.getEntity());
+                        boardManager.addEntity(w.getEntity());
                         root.getChildren().add(w);
                         break;
 
