@@ -1,6 +1,7 @@
 package jeu;
 
 import javafx.scene.Group;
+import javafx.scene.paint.Color;
 import jeu.entitées.*;
 import java.util.Observable;
 import librairie.BoardManager;
@@ -11,15 +12,19 @@ public class Jeu extends Observable implements Runnable {
     private Pacman _pacman;
     private Fantome[] _tabFantomes;
     private BoardManager _boardManager;
-    private Direction _direction;
-
+    private Direction _directionPacman;
+    private Direction _directionFantomeJ2;
     private int _fantomeJ2;
     private int _lives;
     private int _score;
     private int _scoreTotal;
 
-    public void setDirection(Direction dir){
-        _direction = dir;
+    public void setDirectionPacman(Direction dir){
+        _directionPacman = dir;
+    }
+
+    public void setDirectionfantomeJ2(Direction dir){
+        _directionFantomeJ2 = dir;
     }
 
     public Pacman getPacman() {
@@ -62,20 +67,6 @@ public class Jeu extends Observable implements Runnable {
         this._score = score;
     }
 
-    public Jeu(){
-        _direction = Direction.immobile;
-        _pacman = new Pacman(60, 60, 20, 20, 1);
-
-        _boardManager = new BoardManager();
-        _boardManager.addMovableEntity(_pacman.getEntity());
-
-        _pacman.setBoardManager(_boardManager);
-
-
-
-        _tabFantomes = new Fantome[4];
-    }
-
     public Jeu(Group root){
 
         _lives = 3;
@@ -97,10 +88,10 @@ public class Jeu extends Observable implements Runnable {
                 {8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 0, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 1, 8},
                 {8, 1, 8, 8, 1, 1, 1, 1, 8, 8, 1, 8, 8, 0, 0, 0, 0, 0, 8, 8, 1, 1, 1, 1, 8, 8, 8, 1, 8},
                 {8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 0, 8, 8, 8, 0, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 1, 1, 1, 8, 8, 1, 1, 1, 1, 8, 8, 0, 8, 4, 8, 0, 8, 1, 1, 8, 8, 1, 1, 1, 1, 1, 8},
+                {8, 1, 1, 1, 1, 8, 8, 1, 1, 1, 1, 8, 8, 0, 8, 4, 0, 0, 8, 1, 1, 8, 8, 1, 1, 1, 1, 1, 8},
                 {8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 0, 8, 5, 0, 0, 0, 1, 8, 8, 8, 1, 8, 8, 8, 8, 8},
                 {8, 1, 8, 8, 8, 8, 8, 3, 8, 8, 8, 8, 8, 0, 8, 6, 0, 0, 0, 1, 8, 8, 8, 1, 8, 8, 8, 8, 8},
-                {8, 1, 1, 1, 1, 8, 8, 1, 1, 1, 1, 8, 8, 0, 8, 7, 8, 0, 8, 1, 1, 8, 8, 1, 1, 1, 1, 1, 8},
+                {8, 1, 1, 1, 1, 8, 8, 1, 1, 1, 1, 8, 8, 0, 8, 7, 0, 0, 8, 1, 1, 8, 8, 1, 1, 1, 1, 1, 8},
                 {8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 0, 8, 8, 8, 0, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
                 {8, 1, 8, 8, 1, 1, 1, 1, 8, 8, 1, 8, 8, 0, 0, 0, 0, 0, 8, 8, 1, 1, 1, 1, 8, 8, 8, 1, 8},
                 {8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 0, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 1, 8},
@@ -145,29 +136,35 @@ public class Jeu extends Observable implements Runnable {
                         root.getChildren().add(_pacman);
                         break;
 
-//                    case 4 :
-//                        _tabFantomes[0] = new Fantome(10+30*j, 40+30*i, 20, 20, 3, Color.RED);
-//                        _boardManager.addMovableEntity(_tabFantomes[0].getEntity());
-//                        root.getChildren().add(_tabFantomes[0]);
-//                        break;
-//
-//                    case 5 :
-//                        _tabFantomes[1] = new Fantome(10+30*j, 40+30*i, 20, 20, 3, Color.BLUE);
-//                        _boardManager.addMovableEntity(_tabFantomes[1].getEntity());
-//                        root.getChildren().add(_tabFantomes[1]);
-//                        break;
-//
-//                    case 6 :
-//                        _tabFantomes[2] = new Fantome(10+30*j, 40+30*i, 20, 20, 3, Color.PINK);
-//                        _boardManager.addMovableEntity(_tabFantomes[2].getEntity());
-//                        root.getChildren().add(_tabFantomes[2]);
-//                        break;
-//
-//                    case 7 :
-//                        _tabFantomes[3] = new Fantome(10+30*j, 40+30*i, 20, 20, 3, Color.GREEN);
-//                        _boardManager.addMovableEntity(_tabFantomes[3].getEntity());
-//                        root.getChildren().add(_tabFantomes[3]);
-//                        break;
+
+                    case 4 :
+                        _tabFantomes[0] = new Fantome(10+25*j, 40+25*i, 25, 25, 1, Color.RED);
+                        _tabFantomes[0].setBoardManager(_boardManager);
+                        _boardManager.addMovableEntity(_tabFantomes[0].getEntity());
+                        root.getChildren().add(_tabFantomes[0]);
+                        break;
+
+                    case 5 :
+                        _tabFantomes[1] = new Fantome(10+25*j, 40+25*i, 25, 25, 1, Color.BLUE);
+                        _tabFantomes[1].setBoardManager(_boardManager);
+                        _boardManager.addMovableEntity(_tabFantomes[1].getEntity());
+                        root.getChildren().add(_tabFantomes[1]);
+                        break;
+
+
+                    case 6 :
+                        _tabFantomes[2] = new Fantome(10+25*j, 40+25*i, 25, 25, 1, Color.PINK);
+                        _tabFantomes[2].setBoardManager(_boardManager);
+                        _boardManager.addMovableEntity(_tabFantomes[2].getEntity());
+                        root.getChildren().add(_tabFantomes[2]);
+                        break;
+
+                    case 7 :
+                        _tabFantomes[3] = new Fantome(10+25*j, 40+25*i, 25, 25, 1, Color.GREEN);
+                        _tabFantomes[3].setBoardManager(_boardManager);
+                        _boardManager.addMovableEntity(_tabFantomes[3].getEntity());
+                        root.getChildren().add(_tabFantomes[3]);
+                        break;
 
                     case 8 :
                         w = new Wall(10+25*j, 40+25*i, 25, 25);
@@ -190,8 +187,16 @@ public class Jeu extends Observable implements Runnable {
             long startTime = System.currentTimeMillis();
             // réalise tout les calculs et les affichages
 
-            //for (Fantome f : _tabFantomes) f.deplacer();
-            _pacman.changeDirection(_direction);
+            for (int i = 0; i < 4; i++) {
+                if (i == _fantomeJ2) {
+                    _tabFantomes[i].changeDirection(_directionFantomeJ2);
+                    _tabFantomes[i].deplacer();
+                }else {
+                    _tabFantomes[i].deplacerRandom();
+                }
+            }
+
+            _pacman.changeDirection(_directionPacman);
             _pacman.deplacer(this);
 
             setChanged();

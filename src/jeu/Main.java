@@ -1,9 +1,12 @@
 package jeu;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -46,13 +49,13 @@ public class Main extends Application implements Observer {
                 "- v -> fantome Vert\n" +
                 "- n -> pas de fantome\n");
 
-        consigne.setX(950);
+        consigne.setX(750);
         consigne.setY(40);
 
         root.getChildren().add(consigne);
 
         _score = new Text();
-        _score.setX(800);
+        _score.setX(750);
         _score.setY(20);
 
         root.getChildren().add(_score);
@@ -63,24 +66,43 @@ public class Main extends Application implements Observer {
 
         root.getChildren().add(_life);
 
+        Button quit = new Button("Quitter");
+        quit.setLayoutX(750);
+        quit.setLayoutY(600);
+        quit.setOnAction(event -> {
+            Platform.exit();
+            System.exit(0);
+        });
+        root.getChildren().add(quit);
+
+        Button replay = new Button("Rejouer");
+        replay.setLayoutX(750);
+        replay.setLayoutY(650);
+        replay.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                // reload project
+            }
+        });
+        root.getChildren().add(replay);
 
         EventHandler<KeyEvent> keyEventHander = event -> {
 
             switch (event.getCharacter()) {
                 //deplacement pac-mac
-                case "a" : _jeu.setDirection(Direction.immobile);
+                case "a" : _jeu.setDirectionPacman(Direction.immobile);
                     break;
 
-                case "z" : _jeu.setDirection(Direction.haut);
+                case "z" : _jeu.setDirectionPacman(Direction.haut);
                     break;
 
-                case "d" : _jeu.setDirection(Direction.droite);
+                case "d" : _jeu.setDirectionPacman(Direction.droite);
                     break;
 
-                case "s" : _jeu.setDirection(Direction.bas);
+                case "s" : _jeu.setDirectionPacman(Direction.bas);
                     break;
 
-                case "q" : _jeu.setDirection(Direction.gauche);
+                case "q" : _jeu.setDirectionPacman(Direction.gauche);
                     break;
 
                 //choix fantome
@@ -101,29 +123,30 @@ public class Main extends Application implements Observer {
                     break;
 
                 //deplacement fantome
-                case "i" : if (_jeu.getFantomeJ2() < 4) _jeu.getFantomes(_jeu.getFantomeJ2()).changeDirection(Direction.haut);
+                case "i" : if (_jeu.getFantomeJ2() < 4) _jeu.setDirectionfantomeJ2(Direction.haut);
                     break;
 
-                case "l" : if (_jeu.getFantomeJ2() < 4) _jeu.getFantomes(_jeu.getFantomeJ2()).changeDirection(Direction.droite);
+                case "l" : if (_jeu.getFantomeJ2() < 4) _jeu.setDirectionfantomeJ2(Direction.droite);
                     break;
 
-                case "k" : if (_jeu.getFantomeJ2() < 4) _jeu.getFantomes(_jeu.getFantomeJ2()).changeDirection(Direction.bas);
+                case "k" : if (_jeu.getFantomeJ2() < 4) _jeu.setDirectionfantomeJ2(Direction.bas);
                     break;
 
-                case "j" : if (_jeu.getFantomeJ2() < 4) _jeu.getFantomes(_jeu.getFantomeJ2()).changeDirection(Direction.gauche);
+                case "j" : if (_jeu.getFantomeJ2() < 4) _jeu.setDirectionfantomeJ2(Direction.gauche);
                     break;
             }
         };
 
-        //this.onKeyReleased();
-
-
-
         root.requestFocus();
 
-        primaryStage.setScene(new Scene(root, 1200, 1000));
+        primaryStage.setScene(new Scene(root, 1000, 700));
 
         primaryStage.addEventHandler(KeyEvent.KEY_TYPED, keyEventHander);
+
+        primaryStage.setOnCloseRequest(e -> {
+            Platform.exit();
+            System.exit(0);
+        });
 
         primaryStage.requestFocus();
 
@@ -143,8 +166,5 @@ public class Main extends Application implements Observer {
 
     public static void main(String[] args) {
         launch(args);
-
     }
-
-
 }

@@ -8,8 +8,8 @@ import librairie.Entity;
 import librairie.GraphicalEntity;
 
 public class Pacgomme extends Parent implements GraphicalEntity{
-    private Entity _entity;
-    private Shape _image;
+    protected Entity _entity;
+    protected Shape _image;
 
     public Entity getEntity(){
         return _entity;
