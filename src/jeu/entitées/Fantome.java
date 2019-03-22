@@ -10,10 +10,17 @@ import librairie.MovableEntity;
 
 import java.util.Observable;
 import java.util.Observer;
+import librairie.BoardManager;
+import librairie.Entity;
 
 public class Fantome extends Parent implements Observer, GraphicalEntity {
     private MovableEntity _entity;
     private Shape _image;
+    private BoardManager _boardManager;
+    
+    public void setBoardManager(BoardManager boardManager){
+        _boardManager = boardManager;
+    }
 
     public MovableEntity getEntity(){
         return _entity;
@@ -40,6 +47,13 @@ public class Fantome extends Parent implements Observer, GraphicalEntity {
 
     public void deplacer(){
         if (_entity.getDirection()== Direction.immobile) _entity.setDirection(Direction.randomDirection());
+        
+        Entity entity = _boardManager.upcommingCollision(_entity);
+        if(entity != null){
+
+            GraphicalEntity g = entity.getGraphicalEntity();
+            if (g instanceof Wall) _entity.setDirection(Direction.immobile);
+        }        
         _entity.deplacer();
         super.relocate(_entity.getX(),_entity.getY());
     }

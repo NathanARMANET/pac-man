@@ -44,6 +44,7 @@ public class BoardManager {
                 return entityTested;
             }
         }
+        originEntity.translate(x, y);
         return null;
     }
 

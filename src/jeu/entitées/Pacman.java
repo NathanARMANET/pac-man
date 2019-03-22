@@ -80,7 +80,6 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
 
     @Override
     public void update(Observable o, Object arg) {
-
     }
 
 }
