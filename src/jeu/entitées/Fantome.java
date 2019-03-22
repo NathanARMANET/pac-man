@@ -1,11 +1,15 @@
 package jeu.entitées;
 
 import javafx.scene.Parent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import librairie.*;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -15,26 +19,35 @@ public class Fantome extends Parent implements Observer, GraphicalEntity {
 
     private MovableEntity _entity;
     private Direction _previousDirection;
-    private Shape _image;
+    private ImageView _image;
     private BoardManager _boardManager;
 
     public MovableEntity getEntity(){
         return _entity;
     }
 
-    public Shape getImage(){
+    public ImageView getImage(){
         return _image;
     }
 
-    public Fantome(double x, double y, double heigth, double width, double speed, Color color){
+    public Fantome(double x, double y, double heigth, double width, double speed, String couleur){
         _entity = new MovableEntity("fantome", x, y, heigth, width, speed);
         _entity.setGraphicalEntity((GraphicalEntity)this);
         _entity.setDirection(Direction.droite);
         _previousDirection = Direction.droite;
         _entity.addObserver(this);
-        _image = new Rectangle(x,y,width,heigth);
-        _image.setFill(color);
-        this.getChildren().add(_image);
+
+        String str = "./images/fantome-"+couleur+".png";
+
+        try {
+            FileInputStream input1 = new FileInputStream(str);
+            Image img1 = new Image(input1, 20, 20, true, true);
+            _image = new ImageView(img1);
+            this.getChildren().add(_image);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void setBoardManager(BoardManager board){
@@ -82,14 +95,6 @@ public class Fantome extends Parent implements Observer, GraphicalEntity {
             default: impossible = Direction.immobile;
                 break;
         }
-        /*while (_entity.getDirection() == Direction.immobile) {
-
-            do {
-                newDirection = Direction.randomDirection();
-            }while (newDirection == impossible);
-
-            changeDirection(newDirection);
-        }*/
 
         if (_entity.getDirection() == Direction.immobile) {
             Random r = new Random();
@@ -129,8 +134,6 @@ public class Fantome extends Parent implements Observer, GraphicalEntity {
             }
         }
 
-        _entity.deplacer();
-        super.relocate(_entity.getX(),_entity.getY());
         _entity.deplacer();
         super.relocate(_entity.getX(),_entity.getY());
     }

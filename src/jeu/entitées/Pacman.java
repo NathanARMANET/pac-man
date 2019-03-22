@@ -1,12 +1,14 @@
 package jeu.entitées;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import javafx.scene.Parent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 import librairie.BoardManager;
 import librairie.GraphicalEntity;
 import librairie.MovableEntity;
@@ -19,7 +21,7 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
     private double _startX;
     private double _startY;
     private MovableEntity _entity;
-    private Shape _image;
+    private ImageView _image;
 
     private BoardManager _boardManager;
 
@@ -27,7 +29,7 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
         return _entity;
     }
 
-    public Shape getImage(){
+    public ImageView getImage(){
         return _image;
     }
 
@@ -41,10 +43,15 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
         _startY = y;
         _entity.setGraphicalEntity((GraphicalEntity)this);
         _entity.addObserver(this);
-        _image = new Rectangle(x,y,width,heigth);
-        _image.setFill(Color.YELLOW);
-        this.getChildren().add(_image);
 
+        try {
+            FileInputStream input1 = new FileInputStream("./images/pacman.png");
+            Image img1 = new Image(input1, 20, 20, true, true);
+            _image = new ImageView(img1);
+            this.getChildren().add(_image);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void changeDirection(Direction direction){
@@ -63,7 +70,6 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
         _entity.translate(x, y);
     }
 
-    //code cracra
     public void deplacer(Jeu j){
         ArrayList<Entity> listEntity = _boardManager.upcommingCollision(_entity);
         if(listEntity.size() > 0){
@@ -87,6 +93,21 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
             }
         }
         _entity.deplacer();
+        switch (_entity.getDirection()) {
+            case droite: _image.setRotate(0);
+            break;
+
+            case gauche: _image.setRotate(180);
+            break;
+
+            case haut: _image.setRotate(270);
+            break;
+
+            case bas: _image.setRotate(90);
+            break;
+
+            default:break;
+        }
         super.relocate(_entity.getX(),_entity.getY());
     }
 

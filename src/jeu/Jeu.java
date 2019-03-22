@@ -116,14 +116,14 @@ public class Jeu extends Observable implements Runnable {
 
                     case 1 :
                         _scoreTotal += 10;
-                        pg = new Pacgomme((20+25*(2*(float)j+1))/2, (80+25*(2*(float)i+1))/2, 5);
+                        pg = new Pacgomme((20+25*(2*(float)j+1))/2, (80+25*(2*(float)i+1))/2, 2);
                         boardManager.addEntity(pg.getEntity());
                         root.getChildren().add(pg);
                         break;
 
                     case 2 :
                         _scoreTotal += 20;
-                        spg=new SuperPacgomme((20+25*(2*(float)j+1))/2, (80+25*(2*(float)i+1))/2, 10);
+                        spg=new SuperPacgomme((20+25*(2*(float)j+1))/2, (80+25*(2*(float)i+1))/2, 4);
                         boardManager.addEntity(spg.getEntity());
                         root.getChildren().add(spg);
                         break;
@@ -137,14 +137,14 @@ public class Jeu extends Observable implements Runnable {
 
 
                     case 4 :
-                        _tabFantomes[0] = new Fantome(10+25*j, 40+25*i, 25, 25, 1, Color.RED);
+                        _tabFantomes[0] = new Fantome(10+25*j, 40+25*i, 25, 25, 1, "rouge");
                         _tabFantomes[0].setBoardManager(boardManager);
                         boardManager.addMovableEntity(_tabFantomes[0].getEntity());
                         root.getChildren().add(_tabFantomes[0]);
                         break;
 
                     case 5 :
-                        _tabFantomes[1] = new Fantome(10+25*j, 40+25*i, 25, 25, 1, Color.BLUE);
+                        _tabFantomes[1] = new Fantome(10+25*j, 40+25*i, 25, 25, 1, "bleu");
                         _tabFantomes[1].setBoardManager(boardManager);
                         boardManager.addMovableEntity(_tabFantomes[1].getEntity());
                         root.getChildren().add(_tabFantomes[1]);
@@ -152,14 +152,14 @@ public class Jeu extends Observable implements Runnable {
 
 
                     case 6 :
-                        _tabFantomes[2] = new Fantome(10+25*j, 40+25*i, 25, 25, 1, Color.PINK);
+                        _tabFantomes[2] = new Fantome(10+25*j, 40+25*i, 25, 25, 1, "rose");
                         _tabFantomes[2].setBoardManager(boardManager);
                         boardManager.addMovableEntity(_tabFantomes[2].getEntity());
                         root.getChildren().add(_tabFantomes[2]);
                         break;
 
                     case 7 :
-                        _tabFantomes[3] = new Fantome(10+25*j, 40+25*i, 25, 25, 1, Color.GREEN);
+                        _tabFantomes[3] = new Fantome(10+25*j, 40+25*i, 25, 25, 1, "orange");
                         _tabFantomes[3].setBoardManager(boardManager);
                         boardManager.addMovableEntity(_tabFantomes[3].getEntity());
                         root.getChildren().add(_tabFantomes[3]);
@@ -180,7 +180,6 @@ public class Jeu extends Observable implements Runnable {
 
     @Override
     public void run() {
-
         while(_lives > 0 && _score < _scoreTotal) {
             // enregistre le temps au début
             long startTime = System.currentTimeMillis();
@@ -210,9 +209,10 @@ public class Jeu extends Observable implements Runnable {
                     Thread.sleep(remainingTime);
                 } catch (InterruptedException ex) {
                     ex.printStackTrace();
+                } catch (Exception e) {
+                    System.out.println(e.toString());
                 }
             }
-
         }
     }
 }
