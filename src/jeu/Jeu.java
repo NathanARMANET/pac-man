@@ -12,16 +12,14 @@ import librairie.Direction;
 public class Jeu extends Observable implements Runnable {
 
     private Pacman _pacman;
-<<<<<<< HEAD
-    private List<Fantome> _tabFantomes = new ArrayList<Fantome>();
-    private BoardManager _boardManager;
-    private Direction _direction;
-
+    private Fantome[] _tabFantomes;
+    private Direction _directionPacman;
+    private Direction _directionFantomeJ2;
 =======
     private Fantome[] _tabFantomes;
     private Direction _directionPacman;
     private Direction _directionFantomeJ2;
->>>>>>> ac7d6a0863a92a732a18e738dcbfd22c1f392fa6
+>>>>>>> 88fcd1867b4d6b3c01526b6b442826154f561216
     private int _fantomeJ2;
     private int _lives;
     private int _score;
@@ -75,19 +73,8 @@ public class Jeu extends Observable implements Runnable {
         this._score = score;
     }
 
-<<<<<<< HEAD
-    public Jeu(){
-        _direction = Direction.immobile;
-        _pacman = new Pacman(60, 60, 20, 20, 1);
-
-        _boardManager = new BoardManager();
-        _boardManager.addMovableEntity(_pacman.getEntity());
-
-        _pacman.setBoardManager(_boardManager);
-    }
-
 =======
->>>>>>> ac7d6a0863a92a732a18e738dcbfd22c1f392fa6
+>>>>>>> 88fcd1867b4d6b3c01526b6b442826154f561216
     public Jeu(Group root){
 
         _lives = 3;
@@ -106,13 +93,12 @@ public class Jeu extends Observable implements Runnable {
                 {8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 0, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 1, 8},
                 {8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 0, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 1, 8},
                 {8, 1, 8, 8, 1, 1, 1, 1, 8, 8, 1, 8, 8, 0, 0, 0, 0, 0, 8, 8, 1, 1, 1, 1, 8, 8, 8, 1, 8},
-<<<<<<< HEAD
-                {8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 0, 8, 0, 8, 0, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 1, 1, 1, 8, 8, 1, 1, 1, 1, 8, 8, 0, 8, 4, 8, 0, 8, 1, 1, 8, 8, 1, 1, 1, 1, 1, 8},
+                {8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 0, 8, 8, 8, 0, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
+                {8, 1, 1, 1, 1, 8, 8, 1, 1, 1, 1, 8, 8, 0, 8, 4, 0, 0, 0, 1, 1, 8, 8, 1, 1, 1, 1, 1, 8},
 =======
                 {8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 0, 8, 8, 8, 0, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
                 {8, 1, 1, 1, 1, 8, 8, 1, 1, 1, 1, 8, 8, 0, 8, 4, 0, 0, 0, 1, 1, 8, 8, 1, 1, 1, 1, 1, 8},
->>>>>>> ac7d6a0863a92a732a18e738dcbfd22c1f392fa6
+>>>>>>> 88fcd1867b4d6b3c01526b6b442826154f561216
                 {8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 0, 8, 5, 0, 0, 0, 1, 8, 8, 8, 1, 8, 8, 8, 8, 8},
                 {8, 1, 8, 8, 8, 8, 8, 3, 8, 8, 8, 8, 8, 0, 8, 6, 0, 0, 0, 1, 8, 8, 8, 1, 8, 8, 8, 8, 8},
                 {8, 1, 1, 1, 1, 8, 8, 1, 1, 1, 1, 8, 8, 0, 8, 7, 0, 0, 0, 1, 1, 8, 8, 1, 1, 1, 1, 1, 8},
@@ -129,8 +115,6 @@ public class Jeu extends Observable implements Runnable {
                 {8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8}
         };
 
-<<<<<<< HEAD
-        _boardManager = new BoardManager();
 =======
         BoardManager boardManager = new BoardManager();
         _tabFantomes = new Fantome[4];
@@ -143,17 +127,12 @@ public class Jeu extends Observable implements Runnable {
             for (int j=0 ; j < 29 ; j++) {
                 switch (g[i][j]) {
 
-<<<<<<< HEAD
-//                    case 1 :
-//                        _scoreTotal += 10;
-//                        pg = new Pacgomme((20+25*(2*(float)j+1))/2, (80+25*(2*(float)i+1))/2, 5);
-//                        _boardManager.addEntity(pg.getEntity());
-//                        root.getChildren().add(pg);
-//                        break;
-=======
                     case 1 :
                         _scoreTotal += 10;
+<<<<<<< HEAD
                         pg = new Pacgomme((20+25*(2*(float)j+1))/2, (80+25*(2*(float)i+1))/2, 5);
+=======
+                        pg = new Pacgomme((20+25*(2*(float)j+1))/2, (80+25*(2*(float)i+1))/2, 2);
                         boardManager.addEntity(pg.getEntity());
                         root.getChildren().add(pg);
                         break;
@@ -161,7 +140,7 @@ public class Jeu extends Observable implements Runnable {
 
                     case 2 :
                         _scoreTotal += 20;
-                        spg=new SuperPacgomme((20+25*(2*(float)j+1))/2, (80+25*(2*(float)i+1))/2, 10);
+                        spg=new SuperPacgomme((20+25*(2*(float)j+1))/2, (80+25*(2*(float)i+1))/2, 4);
                         boardManager.addEntity(spg.getEntity());
                         root.getChildren().add(spg);
                         break;
@@ -173,42 +152,20 @@ public class Jeu extends Observable implements Runnable {
                         root.getChildren().add(_pacman);
                         break;
 
-<<<<<<< HEAD
-                    case 4 :
-                        _tabFantomes.add(new Fantome(10+25*j, 40+25*i, 25, 25, 1, Color.RED));
-                        _boardManager.addMovableEntity(_tabFantomes.get(0).getEntity());
-                        root.getChildren().add(_tabFantomes.get(0));
-                        _tabFantomes.get(0).setBoardManager(_boardManager);
-                        break;
-//
-//                    case 5 :
-//                        _tabFantomes[1] = new Fantome(10+30*j, 40+30*i, 20, 20, 3, Color.BLUE);
-//                        _boardManager.addMovableEntity(_tabFantomes[1].getEntity());
-//                        root.getChildren().add(_tabFantomes[1]);
-//                        break;
-//
-//                    case 6 :
-//                        _tabFantomes[2] = new Fantome(10+30*j, 40+30*i, 20, 20, 3, Color.PINK);
-//                        _boardManager.addMovableEntity(_tabFantomes[2].getEntity());
-//                        root.getChildren().add(_tabFantomes[2]);
-//                        break;
-//
-//                    case 7 :
-//                        _tabFantomes[3] = new Fantome(10+30*j, 40+30*i, 20, 20, 3, Color.GREEN);
-//                        _boardManager.addMovableEntity(_tabFantomes[3].getEntity());
-//                        root.getChildren().add(_tabFantomes[3]);
-//                        break;
-=======
 
                     case 4 :
                         _tabFantomes[0] = new Fantome(10+25*j, 40+25*i, 25, 25, 1, Color.RED);
+=======
+
+                    case 4 :
+                        _tabFantomes[0] = new Fantome(10+25*j, 40+25*i, 25, 25, 1, "rouge");
                         _tabFantomes[0].setBoardManager(boardManager);
                         boardManager.addMovableEntity(_tabFantomes[0].getEntity());
                         root.getChildren().add(_tabFantomes[0]);
                         break;
 
                     case 5 :
-                        _tabFantomes[1] = new Fantome(10+25*j, 40+25*i, 25, 25, 1, Color.BLUE);
+                        _tabFantomes[1] = new Fantome(10+25*j, 40+25*i, 25, 25, 1, "bleu");
                         _tabFantomes[1].setBoardManager(boardManager);
                         boardManager.addMovableEntity(_tabFantomes[1].getEntity());
                         root.getChildren().add(_tabFantomes[1]);
@@ -216,19 +173,18 @@ public class Jeu extends Observable implements Runnable {
 
 
                     case 6 :
-                        _tabFantomes[2] = new Fantome(10+25*j, 40+25*i, 25, 25, 1, Color.PINK);
+                        _tabFantomes[2] = new Fantome(10+25*j, 40+25*i, 25, 25, 1, "rose");
                         _tabFantomes[2].setBoardManager(boardManager);
                         boardManager.addMovableEntity(_tabFantomes[2].getEntity());
                         root.getChildren().add(_tabFantomes[2]);
                         break;
 
                     case 7 :
-                        _tabFantomes[3] = new Fantome(10+25*j, 40+25*i, 25, 25, 1, Color.GREEN);
+                        _tabFantomes[3] = new Fantome(10+25*j, 40+25*i, 25, 25, 1, "orange");
                         _tabFantomes[3].setBoardManager(boardManager);
                         boardManager.addMovableEntity(_tabFantomes[3].getEntity());
                         root.getChildren().add(_tabFantomes[3]);
                         break;
->>>>>>> ac7d6a0863a92a732a18e738dcbfd22c1f392fa6
 
                     case 8 :
                         w = new Wall(10+25*j, 40+25*i, 25, 25);
@@ -245,15 +201,11 @@ public class Jeu extends Observable implements Runnable {
 
     @Override
     public void run() {
-
         while(_lives > 0 && _score < _scoreTotal) {
             // enregistre le temps au début
             long startTime = System.currentTimeMillis();
             // réalise tout les calculs et les affichages
 
-<<<<<<< HEAD
-            for (Fantome f : _tabFantomes) f.deplacer();
-            _pacman.changeDirection(_direction);
 =======
             for (int i = 0; i < 4; i++) {
                 if (i == _fantomeJ2) {
@@ -265,7 +217,6 @@ public class Jeu extends Observable implements Runnable {
             }
 
             _pacman.changeDirection(_directionPacman);
->>>>>>> ac7d6a0863a92a732a18e738dcbfd22c1f392fa6
             _pacman.deplacer(this);
 
             setChanged();
@@ -280,9 +231,10 @@ public class Jeu extends Observable implements Runnable {
                     Thread.sleep(remainingTime);
                 } catch (InterruptedException ex) {
                     ex.printStackTrace();
+                } catch (Exception e) {
+                    System.out.println(e.toString());
                 }
             }
-
         }
     }
 }

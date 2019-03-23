@@ -11,6 +11,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import librairie.Direction;
+
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -46,7 +49,7 @@ public class Main extends Application implements Observer {
                 "- w -> fantome Rouge\n" +
                 "- x -> fantome Bleu\n" +
                 "- c -> fantome Rose\n" +
-                "- v -> fantome Vert\n" +
+                "- v -> fantome Orange\n" +
                 "- n -> pas de fantome\n");
 
         consigne.setX(750);
@@ -78,11 +81,8 @@ public class Main extends Application implements Observer {
         Button replay = new Button("Rejouer");
         replay.setLayoutX(750);
         replay.setLayoutY(650);
-        replay.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                // reload project
-            }
+        replay.setOnAction(event -> {
+            // reload project
         });
         root.getChildren().add(replay);
 

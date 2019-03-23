@@ -33,7 +33,7 @@ public class BoardManager {
         }
         return null;
     }
-    
+
     public ArrayList<Entity> upcommingCollision(MovableEntity originEntity){
         double x = originEntity.getX();
         double y = originEntity.getY();
@@ -45,11 +45,10 @@ public class BoardManager {
             }
         }
         originEntity.translate(x, y);
-<<<<<<< HEAD
-        return null;
+        return listEntity;
 =======
         return listEntity;
->>>>>>> ac7d6a0863a92a732a18e738dcbfd22c1f392fa6
+>>>>>>> 88fcd1867b4d6b3c01526b6b442826154f561216
     }
 
     public void checkAllCollision(){
@@ -62,4 +61,3 @@ public class BoardManager {
         }
     }
 }
-
