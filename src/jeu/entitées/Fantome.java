@@ -4,23 +4,31 @@ import javafx.scene.Parent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
-import librairie.Direction;
-import librairie.GraphicalEntity;
-import librairie.MovableEntity;
+import librairie.*;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+<<<<<<< HEAD
 import librairie.BoardManager;
 import librairie.Entity;
+=======
+import java.util.Random;
+>>>>>>> ac7d6a0863a92a732a18e738dcbfd22c1f392fa6
 
 public class Fantome extends Parent implements Observer, GraphicalEntity {
+
     private MovableEntity _entity;
+    private Direction _previousDirection;
     private Shape _image;
     private BoardManager _boardManager;
+<<<<<<< HEAD
     
     public void setBoardManager(BoardManager boardManager){
         _boardManager = boardManager;
     }
+=======
+>>>>>>> ac7d6a0863a92a732a18e738dcbfd22c1f392fa6
 
     public MovableEntity getEntity(){
         return _entity;
@@ -33,18 +41,95 @@ public class Fantome extends Parent implements Observer, GraphicalEntity {
     public Fantome(double x, double y, double heigth, double width, double speed, Color color){
         _entity = new MovableEntity("fantome", x, y, heigth, width, speed);
         _entity.setGraphicalEntity((GraphicalEntity)this);
+        _entity.setDirection(Direction.droite);
+        _previousDirection = Direction.droite;
         _entity.addObserver(this);
         _image = new Rectangle(x,y,width,heigth);
         _image.setFill(color);
         this.getChildren().add(_image);
-
     }
+
+    public void setBoardManager(BoardManager board){
+        _boardManager = board;
+    }
+
 
     public void changeDirection(Direction direction){
+        if (direction == null) return;
+
+        Direction oldDirection = _entity.getDirection();
+        double x = _entity.getX();
+        double y = _entity.getY();
+
         _entity.setDirection(direction);
-        // tourner l'image
+        _entity.deplacer();
+
+        ArrayList<Entity> listEntity = _boardManager.upcommingCollision(_entity);
+        if(listEntity.size() > 0){
+            for (Entity entityTested : listEntity) {
+                GraphicalEntity g = entityTested.getGraphicalEntity();
+                if (g instanceof Wall) {
+                    _entity.setDirection(oldDirection);
+                }
+            }
+        }
+        _entity.translate(x, y);
     }
 
+    public void deplacerRandom() {
+        Direction impossible;
+        switch (_previousDirection) {
+            case haut: impossible = Direction.bas;
+                break;
+
+            case droite: impossible = Direction.gauche;
+                break;
+
+            case bas: impossible = Direction.haut;
+                break;
+
+            case gauche: impossible = Direction.droite;
+                break;
+
+            default: impossible = Direction.immobile;
+                break;
+        }
+        /*while (_entity.getDirection() == Direction.immobile) {
+
+            do {
+                newDirection = Direction.randomDirection();
+            }while (newDirection == impossible);
+
+            changeDirection(newDirection);
+        }*/
+
+        if (_entity.getDirection() == Direction.immobile) {
+            Random r = new Random();
+            int ind_R =  r.nextInt(2)+1;
+            int ind = 0;
+            for (Direction dir : Direction.values()) {
+                if (dir != impossible && dir != _previousDirection && dir != Direction.immobile && ind < ind_R) {
+                    changeDirection(dir);
+                    ind++;
+                }
+            }
+        }
+
+        ArrayList<Entity> listEntity = _boardManager.upcommingCollision(_entity);
+        if(listEntity.size() > 0){
+            for (Entity entityTested : listEntity) {
+                GraphicalEntity g = entityTested.getGraphicalEntity();
+                if (g instanceof Wall) {
+                    _previousDirection = _entity.getDirection();
+                    _entity.setDirection(Direction.immobile);
+                }
+            }
+        }
+        _entity.deplacer();
+        super.relocate(_entity.getX(),_entity.getY());
+    }
+
+<<<<<<< HEAD
     public void deplacer(){
         if (_entity.getDirection()== Direction.immobile) _entity.setDirection(Direction.randomDirection());
         
@@ -54,6 +139,22 @@ public class Fantome extends Parent implements Observer, GraphicalEntity {
             GraphicalEntity g = entity.getGraphicalEntity();
             if (g instanceof Wall) _entity.setDirection(Direction.immobile);
         }        
+=======
+    public void deplacer() {
+        ArrayList<Entity> listEntity = _boardManager.upcommingCollision(_entity);
+        if(listEntity.size() > 0){
+            for (Entity entityTested : listEntity) {
+                GraphicalEntity g = entityTested.getGraphicalEntity();
+                if (g instanceof Wall) {
+                    _previousDirection = _entity.getDirection();
+                    _entity.setDirection(Direction.immobile);
+                }
+            }
+        }
+
+        _entity.deplacer();
+        super.relocate(_entity.getX(),_entity.getY());
+>>>>>>> ac7d6a0863a92a732a18e738dcbfd22c1f392fa6
         _entity.deplacer();
         super.relocate(_entity.getX(),_entity.getY());
     }

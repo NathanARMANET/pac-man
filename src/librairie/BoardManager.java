@@ -34,23 +34,28 @@ public class BoardManager {
         return null;
     }
     
-    public Entity upcommingCollision(MovableEntity originEntity){
+    public ArrayList<Entity> upcommingCollision(MovableEntity originEntity){
         double x = originEntity.getX();
         double y = originEntity.getY();
         originEntity.deplacer();
+        ArrayList<Entity> listEntity = new ArrayList<>();
         for (Entity entityTested : _entities) {
             if((originEntity != entityTested) && (originEntity.checkCollision(entityTested))){
-                originEntity.translate(x, y);
-                return entityTested;
+                listEntity.add(entityTested);
             }
         }
         originEntity.translate(x, y);
+<<<<<<< HEAD
         return null;
+=======
+        return listEntity;
+>>>>>>> ac7d6a0863a92a732a18e738dcbfd22c1f392fa6
     }
 
     public void checkAllCollision(){
+        Entity entity;
         for(MovableEntity entityTested : _movableEntities){
-            Entity entity = checkCollision(entityTested);
+            entity = checkCollision(entityTested);
             if(entity != null) {
                 entityTested.eventCollision(entity);
             }
