@@ -30,10 +30,10 @@ public class BoardBuilder {
     private String _boardPath;
     private BoardManager _boardManager;
     private Pacman _pacman;
-    private ArrayList<Fantome> _fantomes = new ArrayList<Fantome>();
+    private ArrayList<Fantome> _fantomes = new ArrayList<>();
     private int _score;
     private int _index;
-    private ArrayList<String> _lecture = new ArrayList<String>();
+    private ArrayList<String> _lecture = new ArrayList<>();
     private Group _root;
             
     

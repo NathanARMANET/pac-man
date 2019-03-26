@@ -1,13 +1,8 @@
 package jeu.entitees;
 
 import javafx.scene.Parent;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import librairie.Entity;
 import librairie.GraphicalEntity;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -25,8 +20,8 @@ public class Wall extends Parent implements GraphicalEntity {
         return _entity;
     }
 
-//    public Wall(double x, double y, double heigth, double width, String typeMur,int angle){
-//        _entity = new Entity("wall", x, y, heigth, width);
+//    public Wall(double x, double y, double height, double width, String typeMur,int angle){
+//        _entity = new Entity("wall", x, y, height, width);
 //
 //        String str = "./images/"+typeMur+".png";
 //
@@ -45,9 +40,9 @@ public class Wall extends Parent implements GraphicalEntity {
 //        _entity.setGraphicalEntity(this);
 //    }
     
-    public Wall(double x, double y, double heigth, double width){
-        _entity = new Entity("wall", x, y, heigth, width);
-        _image = new Rectangle(x,y,width,heigth);
+    public Wall(double x, double y, double height, double width){
+        _entity = new Entity("wall", x, y, height, width);
+        _image = new Rectangle(x,y,width,height);
         _image.setFill(Color.BROWN);
         _entity.setGraphicalEntity(this);
         this.getChildren().add(_image);

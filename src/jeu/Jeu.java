@@ -3,9 +3,7 @@ package jeu;
 import jeu.entitees.Fantome;
 import jeu.entitees.Pacman;
 import java.util.ArrayList;
-import java.util.List;
 import javafx.scene.Group;
-import javafx.scene.paint.Color;
 import java.util.Observable;
 import librairie.BoardManager;
 import librairie.Direction;
@@ -16,7 +14,7 @@ public class Jeu extends Observable implements Runnable {
     private ArrayList<Fantome> _tabFantomes;
     private Direction _directionPacman;
     private Direction _directionFantomeJ2;
-    BoardManager _boardManager;
+    public BoardManager _boardManager;
     private int _fantomeJ2;
     private int _lives;
     private int _score;
@@ -230,7 +228,7 @@ public class Jeu extends Observable implements Runnable {
             for (int i = 0; i < _tabFantomes.size(); i++) {
                 if (i == _fantomeJ2) {
                     _tabFantomes.get(i).changeDirection(_directionFantomeJ2);
-                    //_tabFantomes.get(i).deplacer();
+                    _tabFantomes.get(i).deplacer();
                 }else {
                     _tabFantomes.get(i).deplacerRandom();
                 }

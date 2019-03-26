@@ -32,10 +32,6 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
         return _superPacMan;
     }
 
-    public void set_superPacMan(boolean _superPacMan) {
-        this._superPacMan = _superPacMan;
-    }
-
     public MovableEntity getEntity(){
         return _entity;
     }
@@ -106,7 +102,7 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
                     ((SuperPacgomme) g).getImage().setFill(Color.TRANSPARENT);
                     _boardManager.removeEntity(entityTested);
                     _superPacMan = true;
-                    _timeSuperPacman = 1000;
+                    _timeSuperPacman = 750;
                     try {
                         FileInputStream input1 = new FileInputStream("./images/super-pacman.png");
                         Image img1 = new Image(input1, _width, _heigth, true, true);
