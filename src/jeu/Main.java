@@ -2,18 +2,15 @@ package jeu;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import librairie.Direction;
-
-import java.io.File;
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -25,136 +22,148 @@ public class Main extends Application implements Observer {
 
     @Override
     public void start(Stage primaryStage) {
+        try {
+            primaryStage.setTitle("Pac Man");
+            primaryStage.getIcons().add(new Image("File:./images/pacman.png"));
 
-        primaryStage.setTitle("Pac Man");
+            Group root = new Group();
 
-        Group root = new Group();
-
-        _jeu = new Jeu(root);
+            _jeu = new Jeu(root);
 
 
-        Text consigne = new Text();
-        consigne.setText("Touche pour deplacer Pac-man :\n" +
-                "- a -> immobile\n" +
-                "- z -> haut\n" +
-                "- d -> droite\n" +
-                "- q -> gauche\n" +
-                "- s -> bas\n\n" +
+            Text consigne = new Text();
+            consigne.setText("Touche pour deplacer Pac-man :\n" +
+                    "- a -> immobile\n" +
+                    "- z -> haut\n" +
+                    "- d -> droite\n" +
+                    "- q -> gauche\n" +
+                    "- s -> bas\n\n" +
 
-                "- i -> haut fantome J2\n" +
-                "- l -> droite fantome J2\n" +
-                "- k -> bas fantome J2\n" +
-                "- j -> gauche fantome J2\n\n" +
+                    "- i -> haut fantome J2\n" +
+                    "- l -> droite fantome J2\n" +
+                    "- k -> bas fantome J2\n" +
+                    "- j -> gauche fantome J2\n\n" +
 
-                "- w -> fantome Rouge\n" +
-                "- x -> fantome Bleu\n" +
-                "- c -> fantome Rose\n" +
-                "- v -> fantome Orange\n" +
-                "- n -> pas de fantome\n");
+                    "- w -> fantome Rouge\n" +
+                    "- x -> fantome Bleu\n" +
+                    "- c -> fantome Rose\n" +
+                    "- v -> fantome Orange\n" +
+                    "- n -> pas de fantome\n");
 
-        consigne.setX(800);
-        consigne.setY(40);
+            consigne.setX(800);
+            consigne.setY(40);
 
-        root.getChildren().add(consigne);
+            root.getChildren().add(consigne);
 
-        _score = new Text();
-        _score.setX(750);
-        _score.setY(20);
+            _score = new Text();
+            _score.setX(800);
+            _score.setY(20);
 
-        root.getChildren().add(_score);
+            root.getChildren().add(_score);
 
-        _life = new Text();
-        _life.setX(600);
-        _life.setY(20);
+            _life = new Text();
+            _life.setX(600);
+            _life.setY(20);
 
-        root.getChildren().add(_life);
+            root.getChildren().add(_life);
 
-        Button quit = new Button("Quitter");
-        quit.setLayoutX(750);
-        quit.setLayoutY(600);
-        quit.setOnAction(event -> {
-            Platform.exit();
-            System.exit(0);
-        });
-        root.getChildren().add(quit);
+            Button quit = new Button("Quitter");
+            quit.setLayoutX(800);
+            quit.setLayoutY(600);
+            quit.setOnAction(event -> {
 
-        Button replay = new Button("Rejouer");
-        replay.setLayoutX(750);
-        replay.setLayoutY(650);
-        replay.setOnAction(event -> {
-            // reload project
-        });
-        root.getChildren().add(replay);
+                Platform.exit();
+                System.exit(0);
+            });
+            root.getChildren().add(quit);
 
-        EventHandler<KeyEvent> keyEventHander = event -> {
+            Button replay = new Button("Rejouer");
+            replay.setLayoutX(800);
+            replay.setLayoutY(650);
+            replay.setOnAction(event -> {
+                // reload app
 
-            switch (event.getCharacter()) {
-                //deplacement pac-mac
-                case "a" : _jeu.setDirectionPacman(Direction.immobile);
-                    break;
+                primaryStage.close();
+                Platform.runLater( () -> new Main().start( new Stage() ) );
+            });
+            root.getChildren().add(replay);
 
-                case "z" : _jeu.setDirectionPacman(Direction.haut);
-                    break;
+            EventHandler<KeyEvent> keyEventHander = event -> {
 
-                case "d" : _jeu.setDirectionPacman(Direction.droite);
-                    break;
+                switch (event.getCharacter()) {
+                    //deplacement pac-mac
+                    case "a" : _jeu.setDirectionPacman(Direction.immobile);
+                        break;
 
-                case "s" : _jeu.setDirectionPacman(Direction.bas);
-                    break;
+                    case "z" : _jeu.setDirectionPacman(Direction.haut);
+                        break;
 
-                case "q" : _jeu.setDirectionPacman(Direction.gauche);
-                    break;
+                    case "d" : _jeu.setDirectionPacman(Direction.droite);
+                        break;
 
-                //choix fantome
+                    case "s" : _jeu.setDirectionPacman(Direction.bas);
+                        break;
 
-                case "w" : _jeu.setFantomeJ2(0);
-                    break;
+                    case "q" : _jeu.setDirectionPacman(Direction.gauche);
+                        break;
 
-                case "x" : _jeu.setFantomeJ2(1);
-                    break;
+                    //choix fantome
 
-                case "c" : _jeu.setFantomeJ2(2);
-                    break;
+                    case "w" : _jeu.setFantomeJ2(0);
+                        break;
 
-                case "v" : _jeu.setFantomeJ2(3);
-                    break;
+                    case "x" : _jeu.setFantomeJ2(1);
+                        break;
 
-                case "n" : _jeu.setFantomeJ2(4);
-                    break;
+                    case "c" : _jeu.setFantomeJ2(2);
+                        break;
 
-                //deplacement fantome
-                case "i" : if (_jeu.getFantomeJ2() < 4) _jeu.setDirectionfantomeJ2(Direction.haut);
-                    break;
+                    case "v" : _jeu.setFantomeJ2(3);
+                        break;
 
-                case "l" : if (_jeu.getFantomeJ2() < 4) _jeu.setDirectionfantomeJ2(Direction.droite);
-                    break;
+                    case "n" : _jeu.setFantomeJ2(4);
+                        break;
 
-                case "k" : if (_jeu.getFantomeJ2() < 4) _jeu.setDirectionfantomeJ2(Direction.bas);
-                    break;
+                    //deplacement fantome
+                    case "i" : if (_jeu.getFantomeJ2() < 4) _jeu.setDirectionfantomeJ2(Direction.haut);
+                        break;
 
-                case "j" : if (_jeu.getFantomeJ2() < 4) _jeu.setDirectionfantomeJ2(Direction.gauche);
-                    break;
-            }
-        };
+                    case "l" : if (_jeu.getFantomeJ2() < 4) _jeu.setDirectionfantomeJ2(Direction.droite);
+                        break;
 
-        root.requestFocus();
+                    case "k" : if (_jeu.getFantomeJ2() < 4) _jeu.setDirectionfantomeJ2(Direction.bas);
+                        break;
 
-        primaryStage.setScene(new Scene(root, 1000, 800));
+                    case "j" : if (_jeu.getFantomeJ2() < 4) _jeu.setDirectionfantomeJ2(Direction.gauche);
+                        break;
+                }
+            };
 
-        primaryStage.addEventHandler(KeyEvent.KEY_TYPED, keyEventHander);
+            root.requestFocus();
 
-        primaryStage.setOnCloseRequest(e -> {
-            Platform.exit();
-            System.exit(0);
-        });
+            primaryStage.setScene(new Scene(root, 1100, 800));
 
-        primaryStage.requestFocus();
+            primaryStage.addEventHandler(KeyEvent.KEY_TYPED, keyEventHander);
 
-        primaryStage.show();
+            primaryStage.setOnCloseRequest(e -> {
+                Platform.exit();
+                System.exit(0);
+            });
 
-        _jeu.addObserver(this);
+            primaryStage.requestFocus();
 
-        new Thread(_jeu).start();
+            primaryStage.show();
+
+            _jeu.addObserver(this);
+
+            Thread _thread = new Thread(_jeu);
+
+            _thread.setDaemon(false);
+            _thread.start();
+
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 
@@ -162,6 +171,7 @@ public class Main extends Application implements Observer {
     public void update(Observable o, Object arg) {
         _score.setText("Score : "+ _jeu.getScore());
         _life.setText("Life : "+ _jeu.getLives());
+        Platform.isFxApplicationThread();
     }
 
     public static void main(String[] args) {

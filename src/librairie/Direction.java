@@ -11,7 +11,7 @@ public enum Direction {
     bas,
     immobile;
 
-    private static final List<Direction> VALUES = new ArrayList<Direction>();
+    private static final List<Direction> VALUES = new ArrayList<>();
     static {
         VALUES.add(Direction.gauche);
         VALUES.add(Direction.droite);

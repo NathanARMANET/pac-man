@@ -52,7 +52,7 @@ public class Entity extends Observable{
     }
 
     public boolean checkCollision(Entity obj) {
-        /**
+        /*
          * vérification de la position :
          * trop à droite
          * trop à gauche

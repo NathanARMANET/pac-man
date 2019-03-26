@@ -4,9 +4,6 @@ import com.sun.javafx.scene.traversal.WeightedClosestCorner;
 import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 import librairie.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -29,13 +26,9 @@ public class Fantome extends Parent implements Observer, GraphicalEntity {
         return _entity;
     }
 
-    public ImageView getImage(){
-        return _image;
-    }
-
     public Fantome(double x, double y, double heigth, double width, double speed, String couleur){
         _entity = new MovableEntity("fantome", x, y, heigth, width, speed);
-        _entity.setGraphicalEntity((GraphicalEntity)this);
+        _entity.setGraphicalEntity(this);
         _entity.setDirection(Direction.droite);
         _previousDirection = Direction.droite;
         _entity.addObserver(this);
