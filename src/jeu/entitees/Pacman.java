@@ -1,4 +1,4 @@
-package jeu.entitées;
+package jeu.entitees;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -46,7 +46,7 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
 
         try {
             FileInputStream input1 = new FileInputStream("./images/pacman.png");
-            Image img1 = new Image(input1, 20, 20, true, true);
+            Image img1 = new Image(input1, heigth, width, true, true);
             _image = new ImageView(img1);
             this.getChildren().add(_image);
         } catch (FileNotFoundException e) {

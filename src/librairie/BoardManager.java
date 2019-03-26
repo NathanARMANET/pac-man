@@ -46,9 +46,6 @@ public class BoardManager {
         }
         originEntity.translate(x, y);
         return listEntity;
-=======
-        return listEntity;
->>>>>>> 88fcd1867b4d6b3c01526b6b442826154f561216
     }
 
     public void checkAllCollision(){

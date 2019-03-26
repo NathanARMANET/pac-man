@@ -52,7 +52,7 @@ public class Main extends Application implements Observer {
                 "- v -> fantome Orange\n" +
                 "- n -> pas de fantome\n");
 
-        consigne.setX(750);
+        consigne.setX(800);
         consigne.setY(40);
 
         root.getChildren().add(consigne);
@@ -139,7 +139,7 @@ public class Main extends Application implements Observer {
 
         root.requestFocus();
 
-        primaryStage.setScene(new Scene(root, 1000, 700));
+        primaryStage.setScene(new Scene(root, 1000, 800));
 
         primaryStage.addEventHandler(KeyEvent.KEY_TYPED, keyEventHander);
 

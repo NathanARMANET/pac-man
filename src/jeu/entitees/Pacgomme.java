@@ -1,4 +1,4 @@
-package jeu.entitées;
+package jeu.entitees;
 
 import javafx.scene.Parent;
 import javafx.scene.paint.Color;
