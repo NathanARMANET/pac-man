@@ -33,7 +33,7 @@ public class BoardManager {
         }
         return null;
     }
-    
+
     public ArrayList<Entity> upcommingCollision(MovableEntity originEntity){
         double x = originEntity.getX();
         double y = originEntity.getY();
@@ -58,4 +58,3 @@ public class BoardManager {
         }
     }
 }
-
