@@ -62,7 +62,7 @@ public class Main extends Application implements Observer {
             root.getChildren().add(_score);
 
             _life = new Text();
-            _life.setX(600);
+            _life.setX(900);
             _life.setY(20);
 
             root.getChildren().add(_life);

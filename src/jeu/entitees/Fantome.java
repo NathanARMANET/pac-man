@@ -1,6 +1,6 @@
 package jeu.entitees;
 
-import com.sun.javafx.scene.traversal.WeightedClosestCorner;
+
 import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -41,7 +41,7 @@ public class Fantome extends Parent implements Observer, GraphicalEntity {
 
         try {
             FileInputStream input1 = new FileInputStream(str);
-            Image img1 = new Image(input1, heigth, width, true, true);
+            Image img1 = new Image(input1, width, heigth, true, true);
             _image = new ImageView(img1);
             this.getChildren().add(_image);
         } catch (FileNotFoundException e) {
@@ -120,6 +120,8 @@ public class Fantome extends Parent implements Observer, GraphicalEntity {
                 }else if (g instanceof Pacman && ((Pacman) g).isSuperPacMan()) {
                     _entity.setX(_startX);
                     _entity.setY(_startY);
+                    _previousDirection = Direction.immobile;
+                    _entity.setDirection(Direction.immobile);
                 }
             }
         }

@@ -25,6 +25,8 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
     private BoardManager _boardManager;
     private boolean _superPacMan;
     private int _timeSuperPacman;
+    private double _heigth;
+    private double _width;
 
     public boolean isSuperPacMan() {
         return _superPacMan;
@@ -44,6 +46,8 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
 
     public Pacman(double x, double y, double heigth, double width, double speed){
         _superPacMan = false;
+        _heigth = heigth;
+        _width = width;
         _timeSuperPacman = 0;
         _entity = new MovableEntity("pacman", x, y, heigth, width, speed);
         _startX = x;
@@ -53,7 +57,7 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
 
         try {
             FileInputStream input1 = new FileInputStream("./images/pacman.png");
-            Image img1 = new Image(input1, heigth, width, true, true);
+            Image img1 = new Image(input1, width, heigth, true, true);
             _image = new ImageView(img1);
             this.getChildren().add(_image);
         } catch (FileNotFoundException e) {
@@ -85,7 +89,7 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
                 _superPacMan = false;
                 try {
                     FileInputStream input1 = new FileInputStream("./images/pacman.png");
-                    Image img1 = new Image(input1, 20, 20, true, true);
+                    Image img1 = new Image(input1, _width, _heigth, true, true);
                     _image.setImage(img1);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -105,7 +109,7 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
                     _timeSuperPacman = 1000;
                     try {
                         FileInputStream input1 = new FileInputStream("./images/super-pacman.png");
-                        Image img1 = new Image(input1, 20, 20, true, true);
+                        Image img1 = new Image(input1, _width, _heigth, true, true);
                         _image.setImage(img1);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
@@ -118,6 +122,8 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
                     j.setLives(j.getLives()-1);
                     _entity.setX(_startX);
                     _entity.setY(_startY);
+                    _superPacMan  = true;
+                    _timeSuperPacman = 50;
                 }
             }
         }
