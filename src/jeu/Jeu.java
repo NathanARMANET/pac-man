@@ -1,7 +1,6 @@
 package jeu;
 
 import javafx.scene.Group;
-import javafx.scene.paint.Color;
 import jeu.entitées.*;
 import java.util.Observable;
 import librairie.BoardManager;
@@ -24,22 +23,6 @@ public class Jeu extends Observable implements Runnable {
 
     public void setDirectionfantomeJ2(Direction dir){
         _directionFantomeJ2 = dir;
-    }
-
-    public Pacman getPacman() {
-        return _pacman;
-    }
-
-    public void setPacman(Pacman pacman) {
-        this._pacman = pacman;
-    }
-
-    public Fantome getFantomes(int indice) {
-        return _tabFantomes[indice];
-    }
-
-    public void setFantomes(int indice, Fantome fantome) {
-        this._tabFantomes[indice] = fantome;
     }
 
     public int getFantomeJ2() {
@@ -76,32 +59,34 @@ public class Jeu extends Observable implements Runnable {
         _tabFantomes = new Fantome[4];
 
         int [][] g = new int[][]{
-                {8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8},
-                {8, 2, 1, 1, 1, 8, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 8},
-                {8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 1, 1, 1, 1, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8},
-                {8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 0, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 0, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 1, 1, 1, 1, 8, 8, 1, 8, 8, 0, 0, 0, 0, 0, 8, 8, 1, 1, 1, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 0, 8, 8, 8, 0, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 1, 1, 1, 8, 8, 1, 1, 1, 1, 8, 8, 0, 8, 4, 0, 0, 0, 1, 1, 8, 8, 1, 1, 1, 1, 1, 8},
-                {8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 0, 8, 5, 0, 0, 0, 1, 8, 8, 8, 1, 8, 8, 8, 8, 8},
-                {8, 1, 8, 8, 8, 8, 8, 3, 8, 8, 8, 8, 8, 0, 8, 6, 0, 0, 0, 1, 8, 8, 8, 1, 8, 8, 8, 8, 8},
-                {8, 1, 1, 1, 1, 8, 8, 1, 1, 1, 1, 8, 8, 0, 8, 7, 0, 0, 0, 1, 1, 8, 8, 1, 1, 1, 1, 1, 8},
-                {8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 0, 8, 8, 8, 0, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 1, 1, 1, 1, 8, 8, 1, 8, 8, 0, 0, 0, 0, 0, 8, 8, 1, 1, 1, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 0, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 0, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8},
-                {8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 1, 1, 1, 1, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8},
-                {8, 2, 1, 1, 1, 8, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 8},
-                {8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8}
+                {8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8},
+                {8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8},
+                {8, 8, 2, 1, 1, 1, 8, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 8, 8},
+                {8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8, 8},
+                {8, 8, 1, 8, 8, 1, 1, 1, 1, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8, 8},
+                {8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8, 8},
+                {8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8, 8},
+                {8, 8, 1, 8, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 8},
+                {8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 0, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 1, 8, 8},
+                {8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 0, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 1, 8, 8},
+                {8, 8, 1, 8, 8, 1, 1, 1, 1, 8, 8, 1, 8, 8, 0, 0, 0, 0, 0, 8, 8, 1, 1, 1, 1, 8, 8, 8, 1, 8, 8},
+                {8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 0, 8, 8, 8, 0, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8, 8},
+                {8, 8, 1, 1, 1, 1, 8, 8, 1, 1, 1, 1, 8, 8, 0, 8, 4, 0, 0, 0, 1, 1, 8, 8, 1, 1, 1, 1, 1, 8, 8},
+                {8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 8, 0, 8, 5, 0, 0, 0, 1, 8, 8, 8, 1, 8, 8, 8, 8, 8, 8},
+                {8, 8, 1, 8, 8, 8, 8, 8, 3, 8, 8, 8, 8, 8, 0, 8, 6, 0, 0, 0, 1, 8, 8, 8, 1, 8, 8, 8, 8, 8, 8},
+                {8, 8, 1, 1, 1, 1, 8, 8, 1, 1, 1, 1, 8, 8, 0, 8, 7, 0, 0, 0, 1, 1, 8, 8, 1, 1, 1, 1, 1, 8, 8},
+                {8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 0, 8, 8, 8, 0, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8, 8},
+                {8, 8, 1, 8, 8, 1, 1, 1, 1, 8, 8, 1, 8, 8, 0, 0, 0, 0, 0, 8, 8, 1, 1, 1, 1, 8, 8, 8, 1, 8, 8},
+                {8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 0, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 1, 8, 8},
+                {8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 0, 8, 8, 8, 8, 8, 8, 8, 1, 8, 8, 8, 1, 8, 8},
+                {8, 8, 1, 8, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 8},
+                {8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8, 8},
+                {8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8, 8},
+                {8, 8, 1, 8, 8, 1, 1, 1, 1, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8, 8},
+                {8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 8, 8, 1, 8, 8, 1, 8, 8, 8, 1, 8, 8},
+                {8, 8, 2, 1, 1, 1, 8, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 8, 8},
+                {8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8},
+                {8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8}
         };
 
         BoardManager boardManager = new BoardManager();
@@ -110,8 +95,10 @@ public class Jeu extends Observable implements Runnable {
         Pacgomme pg;
         SuperPacgomme spg;
 
-        for (int i=0; i< 26; i++) {
-            for (int j=0 ; j < 29 ; j++) {
+        int nbrPacGomme;
+
+        for (int i=0; i< 28; i++) {
+            for (int j=0 ; j < 31 ; j++) {
                 switch (g[i][j]) {
 
                     case 1 :
@@ -166,9 +153,41 @@ public class Jeu extends Observable implements Runnable {
                         break;
 
                     case 8 :
-                        w = new Wall(10+25*j, 40+25*i, 25, 25);
-                        boardManager.addEntity(w.getEntity());
-                        root.getChildren().add(w);
+                        w= null;
+                        if ((i == 0 && j == 0)
+                            || (i == 0 && j == 30)
+                            || (i == 27 && j == 0)
+                            || (i == 27 && j == 30))
+                            w = new Wall(10+25*j, 40+25*i, 25, 25, "coin", 0);
+                        else if (i == 0 || i == 27)
+                            w = new Wall(10+25*j, 40+25*i, 25, 25, "mur", 0);
+                        else if (j == 0 || j == 30)
+                            w = new Wall(10+25*j, 40+25*i, 25, 25, "mur", 270);
+                        else if (g[i-1][j]==8 && g[i+1][j]==8 && (g[i][j-1]!=8 || g[i][j+1]!=8))
+                            w = new Wall(10+25*j, 40+25*i, 25, 25, "mur", 270);
+                        else if (g[i][j-1]==8 && g[i][j+1]==8 && (g[i-1][j]!=8 || g[i+1][j]!=8))
+                            w = new Wall(10+25*j, 40+25*i, 25, 25, "mur", 0);
+                        else if ((g[i-1][j]==8 && g[i][j+1]==8 && g[i][j-1]!=8 && g[i+1][j]!=8)
+                                || (g[i+1][j]==8 && g[i][j+1]==8 && g[i][j-1]!=8 && g[i-1][j]!=8)
+                                || (g[i][j-1]==8 && g[i-1][j]==8 && g[i][j+1]!=8 && g[i+1][j]!=8)
+                                || (g[i][j-1]==8 && g[i+1][j]==8 && g[i][j+1]!=8 && g[i-1][j]!=8))
+                            w = new Wall(10+25*j, 40+25*i, 25, 25, "coin", 0);
+                        else {
+                            nbrPacGomme = 0;
+
+                            for (int x = -1 ; x <= 1 ; x++){
+                                for (int y = -1 ; y <= 1 ; y++) {
+                                    if (g[i+x][j+y] != 8) nbrPacGomme++;
+                                }
+                            }
+
+                            if (nbrPacGomme >= 1 && nbrPacGomme < 3) w = new Wall(10+25*j, 40+25*i, 25, 25, "coin", 0);
+                        }
+
+                        if (w != null) {
+                            boardManager.addEntity(w.getEntity());
+                            root.getChildren().add(w);
+                        }
                         break;
 
                     default: break;
@@ -181,37 +200,33 @@ public class Jeu extends Observable implements Runnable {
     @Override
     public void run() {
         while(_lives > 0 && _score < _scoreTotal) {
-            // enregistre le temps au début
-            long startTime = System.currentTimeMillis();
             // réalise tout les calculs et les affichages
 
             for (int i = 0; i < 4; i++) {
-                if (i == _fantomeJ2) {
-                    _tabFantomes[i].changeDirection(_directionFantomeJ2);
-                    _tabFantomes[i].deplacer();
-                }else {
-                    _tabFantomes[i].deplacerRandom();
+                if (_tabFantomes[i] != null) {
+                    if (i == _fantomeJ2) {
+                        _tabFantomes[i].changeDirection(_directionFantomeJ2);
+                        _tabFantomes[i].deplacer();
+                    }else {
+                        _tabFantomes[i].deplacerRandom();
+                    }
                 }
             }
 
-            _pacman.changeDirection(_directionPacman);
-            _pacman.deplacer(this);
+            if (_pacman != null) {
+                _pacman.changeDirection(_directionPacman);
+                _pacman.deplacer(this);
+            }
 
             setChanged();
             notifyObservers();
 
-            // calcule le temps écoulé depuis le début
-            long elapsedTime = System.currentTimeMillis() - startTime;
-            // calcule le temps restant pour avoir un affichage 60 image par seconde
-            long remainingTime = (1000 / 120) - elapsedTime;
-            if (remainingTime > 0) {
-                try {
-                    Thread.sleep(remainingTime);
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                } catch (Exception e) {
-                    System.out.println(e.toString());
-                }
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            } catch (Exception e) {
+                System.out.println(e.toString());
             }
         }
     }

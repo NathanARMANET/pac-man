@@ -29,10 +29,6 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
         return _entity;
     }
 
-    public ImageView getImage(){
-        return _image;
-    }
-
     public void setBoardManager(BoardManager board){
         _boardManager = board;
     }
@@ -41,7 +37,7 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
         _entity = new MovableEntity("pacman", x, y, heigth, width, speed);
         _startX = x;
         _startY = y;
-        _entity.setGraphicalEntity((GraphicalEntity)this);
+        _entity.setGraphicalEntity(this);
         _entity.addObserver(this);
 
         try {
@@ -79,7 +75,7 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
                     _entity.setDirection(Direction.immobile);
                 } else if (g instanceof SuperPacgomme) {
                     j.setScore(j.getScore()+20);
-                    ((Pacgomme) g).getImage().setFill(Color.TRANSPARENT);
+                    ((SuperPacgomme) g).getImage().setFill(Color.TRANSPARENT);
                     _boardManager.removeEntity(entityTested);
                 } else if (g instanceof Pacgomme) {
                     j.setScore(j.getScore()+10);

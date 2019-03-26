@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class BoardManager {
 
-    private List<Entity> _entities = new ArrayList<Entity>();
-    private List<MovableEntity> _movableEntities = new ArrayList<MovableEntity>();
+    private List<Entity> _entities = new ArrayList<>();
+    private List<MovableEntity> _movableEntities = new ArrayList<>();
 
     public void addEntity(Entity entity) {
        _entities.add(entity);
