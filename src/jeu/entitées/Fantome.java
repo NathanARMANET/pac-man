@@ -14,6 +14,8 @@ import java.util.Random;
 
 public class Fantome extends Parent implements Observer, GraphicalEntity {
 
+    private double _startX;
+    private double _startY;
     private MovableEntity _entity;
     private Direction _previousDirection;
     private ImageView _image;
@@ -24,6 +26,8 @@ public class Fantome extends Parent implements Observer, GraphicalEntity {
     }
 
     public Fantome(double x, double y, double heigth, double width, double speed, String couleur){
+        _startX = x;
+        _startY = y;
         _entity = new MovableEntity("fantome", x, y, heigth, width, speed);
         _entity.setGraphicalEntity(this);
         _entity.setDirection(Direction.droite);
@@ -108,6 +112,9 @@ public class Fantome extends Parent implements Observer, GraphicalEntity {
                 if (g instanceof Wall) {
                     _previousDirection = _entity.getDirection();
                     _entity.setDirection(Direction.immobile);
+                }else if (g instanceof Pacman && ((Pacman) g).isSuperPacMan()) {
+                    _entity.setX(_startX);
+                    _entity.setY(_startY);
                 }
             }
         }

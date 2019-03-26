@@ -22,8 +22,17 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
     private double _startY;
     private MovableEntity _entity;
     private ImageView _image;
-
     private BoardManager _boardManager;
+    private boolean _superPacMan;
+    private int _timeSuperPacman;
+
+    public boolean isSuperPacMan() {
+        return _superPacMan;
+    }
+
+    public void set_superPacMan(boolean _superPacMan) {
+        this._superPacMan = _superPacMan;
+    }
 
     public MovableEntity getEntity(){
         return _entity;
@@ -34,6 +43,8 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
     }
 
     public Pacman(double x, double y, double heigth, double width, double speed){
+        _superPacMan = false;
+        _timeSuperPacman = 0;
         _entity = new MovableEntity("pacman", x, y, heigth, width, speed);
         _startX = x;
         _startY = y;
@@ -68,6 +79,19 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
 
     public void deplacer(Jeu j){
         ArrayList<Entity> listEntity = _boardManager.upcommingCollision(_entity);
+        if (_timeSuperPacman > 0) {
+            _timeSuperPacman--;
+            if (_timeSuperPacman == 0) {
+                _superPacMan = false;
+                try {
+                    FileInputStream input1 = new FileInputStream("./images/pacman.png");
+                    Image img1 = new Image(input1, 20, 20, true, true);
+                    _image.setImage(img1);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         if(listEntity.size() > 0){
             for (Entity entityTested : listEntity) {
                 GraphicalEntity g = entityTested.getGraphicalEntity();
@@ -77,11 +101,20 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
                     j.setScore(j.getScore()+20);
                     ((SuperPacgomme) g).getImage().setFill(Color.TRANSPARENT);
                     _boardManager.removeEntity(entityTested);
+                    _superPacMan = true;
+                    _timeSuperPacman = 1000;
+                    try {
+                        FileInputStream input1 = new FileInputStream("./images/super-pacman.png");
+                        Image img1 = new Image(input1, 20, 20, true, true);
+                        _image.setImage(img1);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
                 } else if (g instanceof Pacgomme) {
                     j.setScore(j.getScore()+10);
                     ((Pacgomme) g).getImage().setFill(Color.TRANSPARENT);
                     _boardManager.removeEntity(entityTested);
-                }else if(g instanceof Fantome) {
+                }else if(g instanceof Fantome && !_superPacMan) {
                     j.setLives(j.getLives()-1);
                     _entity.setX(_startX);
                     _entity.setY(_startY);
