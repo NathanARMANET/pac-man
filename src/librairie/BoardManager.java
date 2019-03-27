@@ -48,12 +48,13 @@ public class BoardManager {
         return listEntity;
     }
 
+    @Deprecated
     public void checkAllCollision(){
         Entity entity;
         for(MovableEntity entityTested : _movableEntities){
             entity = checkCollision(entityTested);
             if(entity != null) {
-                entityTested.eventCollision(entity);
+                //entityTested.eventCollision(entity);
             }
         }
     }

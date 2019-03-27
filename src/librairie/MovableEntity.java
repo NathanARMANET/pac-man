@@ -53,8 +53,4 @@ public class MovableEntity extends Entity {
             default: break;
         }
     }
-
-    public void eventCollision(Entity obj) {
-
-    }
 }
