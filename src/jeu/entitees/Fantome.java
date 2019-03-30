@@ -21,7 +21,6 @@ public class Fantome extends Parent implements Observer, GraphicalEntity {
     private double _startY;
     private MovableEntity _entity;
     private Direction _previousDirection;
-    private ImageView _image;
     private BoardManager _boardManager;
 
     public MovableEntity getEntity(){
@@ -31,7 +30,7 @@ public class Fantome extends Parent implements Observer, GraphicalEntity {
     public Fantome(double x, double y, double heigth, double width, double speed, String couleur){
         _startX = x;
         _startY = y;
-        _entity = new MovableEntity("fantome", x, y, heigth, width, speed);
+        _entity = new MovableEntity(x, y, heigth, width, speed);
         _entity.setGraphicalEntity(this);
         _entity.setDirection(Direction.droite);
         _previousDirection = Direction.droite;
@@ -42,8 +41,8 @@ public class Fantome extends Parent implements Observer, GraphicalEntity {
         try {
             FileInputStream input1 = new FileInputStream(str);
             Image img1 = new Image(input1, width, heigth, true, true);
-            _image = new ImageView(img1);
-            this.getChildren().add(_image);
+            ImageView image = new ImageView(img1);
+            this.getChildren().add(image);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -57,7 +56,12 @@ public class Fantome extends Parent implements Observer, GraphicalEntity {
         _boardManager = board;
     }
 
-
+    /**
+     * Verifie si on peut aller dans la direction passer en paramètres
+     * Si oui, on y va
+     * Sinon, on continue dans l'acienne direction
+     * @param direction la nouvelle direstion à tester
+     */
     public void changeDirection(Direction direction){
         if (direction == null) return;
 
@@ -79,7 +83,12 @@ public class Fantome extends Parent implements Observer, GraphicalEntity {
         }
         _entity.translate(x, y);
     }
-        
+
+    /**
+     * Fait deplacer le pacman et gères les colisions avec les autres entitées
+     * De plus, si il rencontre un mur, il choisit une nouvelle direction aléatoirement
+     * Mais il ne peux pas retourner en arrière
+     */
     public void deplacerRandom() {
         Direction impossible;
         switch (_previousDirection) {
@@ -129,6 +138,9 @@ public class Fantome extends Parent implements Observer, GraphicalEntity {
         super.relocate(_entity.getX(),_entity.getY());
     }
 
+    /**
+     * Fait deplacer le fantome et gères les colisions avec les autres entitées
+     */
     public void deplacer() {
         ArrayList<Entity> listEntity = _boardManager.upcommingCollision(_entity);
         if(listEntity.size() > 0){

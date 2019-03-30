@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Enumération des direction possible
+ */
 public enum Direction {
     gauche,
     droite,
@@ -23,6 +26,9 @@ public enum Direction {
     private static final int SIZE = VALUES.size();
     private static final Random RANDOM = new Random();
 
+    /**
+     * @return Une direction aléatoire
+     */
     public static Direction randomDirection()  {
         return VALUES.get(RANDOM.nextInt(SIZE));
     }

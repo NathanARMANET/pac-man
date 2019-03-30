@@ -10,6 +10,10 @@ import javafx.stage.Stage;
 
 public class Menu extends Application {
 
+    /**
+     * Ouvre et gère le menu
+     * @param primaryStage la fenètre
+     */
     @Override
     public void start(Stage primaryStage) {
         try {

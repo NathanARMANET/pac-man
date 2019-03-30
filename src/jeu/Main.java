@@ -7,13 +7,10 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import librairie.Direction;
-
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -23,6 +20,10 @@ public class Main extends Application implements Observer {
     private Text _score;
     private Text _life;
 
+    /**
+     * Ouvre le jeu
+     * @param primaryStage le fenètre
+     */
     @Override
     public void start(Stage primaryStage) {
         try {
@@ -170,14 +171,13 @@ public class Main extends Application implements Observer {
     }
 
 
+    /**
+     * Met à jour l'affichage
+     */
     @Override
     public void update(Observable o, Object arg) {
         _score.setText("Score : "+ _jeu.getScore());
         _life.setText("Life : "+ _jeu.getLives());
         Platform.isFxApplicationThread();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

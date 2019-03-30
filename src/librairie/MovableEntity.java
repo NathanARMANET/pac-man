@@ -5,18 +5,18 @@ public class MovableEntity extends Entity {
     private double _speed;
     private Direction _direction;
 
-    public MovableEntity(String name, double x, double y, CollisionBox hitBox, double speed) {
-        super(name, x, y, hitBox);
+    public MovableEntity(double x, double y, CollisionBox hitBox, double speed) {
+        super(x, y, hitBox);
         _direction = Direction.immobile;
         _speed = speed;
     }
 
-    public MovableEntity(String name, double x, double y, double height, double width, double speed) {
-        this(name, x, y, new CollisionBox(height, width), speed);
+    public MovableEntity(double x, double y, double height, double width, double speed) {
+        this(x, y, new CollisionBox(height, width), speed);
     }
 
     public MovableEntity(MovableEntity entity){
-        this(entity._name, entity._x ,entity._y, entity._hitBox, entity._speed);
+        this(entity._x ,entity._y, entity._hitBox, entity._speed);
         this._direction = entity._direction;
     }
 
@@ -36,6 +36,9 @@ public class MovableEntity extends Entity {
         this._direction = _d;
     }
 
+    /**
+     * Déplace l'entitée
+     */
     public void deplacer() {
         switch (_direction) {
             case haut: _y -= _speed;

@@ -5,19 +5,10 @@ import java.util.Observable;
 
 public class Entity extends Observable{
 
-    protected String _name;
     protected double _x;
     protected double _y;
     protected CollisionBox _hitBox;
     protected GraphicalEntity _graphic;
-
-    public String getName() {
-        return _name;
-    }
-
-    public void setName(String _name) {
-        this._name = _name;
-    }
 
     public double getX() {
         return _x;
@@ -35,22 +26,41 @@ public class Entity extends Observable{
         _y = y;
     }
 
-    public Entity(String name, double x, double y, CollisionBox hitBox) {
-        _name = name;
+    public GraphicalEntity getGraphicalEntity() {
+        return _graphic;
+    }
+
+    public void setGraphicalEntity(GraphicalEntity entity){
+        if (entity == null)
+            throw new IllegalArgumentException();
+        _graphic = entity;
+    }
+
+    public Entity(double x, double y, CollisionBox hitBox) {
         _x = x;
         _y = y;
         _hitBox = hitBox;
     }
 
-    public Entity(String name, double x, double y, double height, double width) {
-        this(name, x, y, new CollisionBox(height, width));
+    public Entity(double x, double y, double height, double width) {
+        this(x, y, new CollisionBox(height, width));
     }
 
+    /**
+     * Met a jour le position de l'entitée
+     * @param x nouvelle position vertical
+     * @param y nouvelle position horizontal
+     */
     public void translate(double x, double y) {
         _x = x;
         _y = y;
     }
 
+    /**
+     * Verifie si l'entité est en colision avec une autre entitée passée en paramètre
+     * @param obj l'autre entité
+     * @return si l'entité est en colision avec une autre entitée ou non
+     */
     public boolean checkCollision(Entity obj) {
         /*
          * vérification de la position :
@@ -63,15 +73,5 @@ public class Entity extends Observable{
             || (_x + _hitBox.getWidth() <= obj._x)
             || (_y >= obj._y + obj._hitBox.getHeight())
             || (_y + _hitBox.getHeight() <= obj._y));
-    }
-
-    public void setGraphicalEntity(GraphicalEntity entity){
-        if (entity == null)
-            throw new IllegalArgumentException();
-        _graphic = entity;
-    }
-
-    public GraphicalEntity getGraphicalEntity() {
-        return _graphic;
     }
 }

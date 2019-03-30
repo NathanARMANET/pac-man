@@ -35,11 +35,7 @@ public class BoardBuilder {
     private int _index;
     private ArrayList<String> _lecture = new ArrayList<>();
     private Group _root;
-            
-    
-    public String getBoardPath(){
-        return _boardPath;
-    }
+
     
     public void setBoardPath(String path){
         _boardPath = path;
@@ -67,7 +63,10 @@ public class BoardBuilder {
         _normalSize = normalSize;
         _root = root;
     }
-    
+
+    /**
+     * Construit tous ce qui est nécéssaire au jeu
+     */
     public void build(){
         lectureFichier();
         _boardManager = new BoardManager();
@@ -75,7 +74,10 @@ public class BoardBuilder {
         buildWall();
         buildEntities();
     }
-    
+
+    /**
+     * Construit les murs du jeu
+     */
     private void buildWall(){
         while (_index < _lecture.size()) {
             if (_lecture.get(_index).length() == 0){
@@ -110,7 +112,10 @@ public class BoardBuilder {
             _index++;    
         }
     }
-    
+
+    /**
+     * Construit les entitées du jeu
+     */
     private void buildEntities(){
         String[] coord = _lecture.get(_index).split(",");
         int x = Integer.valueOf(coord[0]);
@@ -138,7 +143,10 @@ public class BoardBuilder {
             _index++;    
         }
     }
-    
+
+    /**
+     * Lis le fichier
+     */
     private void lectureFichier(){
         try{
             InputStream flux=new FileInputStream(_boardPath); 

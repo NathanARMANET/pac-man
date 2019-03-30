@@ -14,7 +14,6 @@ public class Jeu extends Observable implements Runnable {
     private ArrayList<Fantome> _tabFantomes;
     private Direction _directionPacman;
     private Direction _directionFantomeJ2;
-    public BoardManager _boardManager;
     private int _fantomeJ2;
     private int _lives;
     private int _score;
@@ -26,22 +25,6 @@ public class Jeu extends Observable implements Runnable {
 
     public void setDirectionfantomeJ2(Direction dir){
         _directionFantomeJ2 = dir;
-    }
-
-    public Pacman getPacman() {
-        return _pacman;
-    }
-
-    public void setPacman(Pacman pacman) {
-        this._pacman = pacman;
-    }
-
-    public Fantome getFantomes(int indice) {
-        return _tabFantomes.get(indice);
-    }
-
-    public void setFantomes(int indice, Fantome fantome) {
-        this._tabFantomes.set(indice, fantome);
     }
 
     public int getFantomeJ2() {
@@ -73,7 +56,7 @@ public class Jeu extends Observable implements Runnable {
         BoardBuilder bb = new BoardBuilder(20, 20, 30,root);
         bb.setBoardPath("./mapTest.txt");
         bb.build();
-        _boardManager = bb.getBoardManager();
+        BoardManager boardManager = bb.getBoardManager();
         _pacman = bb.getPacman();
         _tabFantomes = bb.getFantomes();
         _lives = 3;
@@ -82,6 +65,10 @@ public class Jeu extends Observable implements Runnable {
         _fantomeJ2 = -1;
     }
 
+    /**
+     * Le jeu en lui même
+     * Fait bouger le pacman et les fantomes
+     */
     @Override
     public void run() {
         while(_lives > 0 && _score < _scoreTotal) {

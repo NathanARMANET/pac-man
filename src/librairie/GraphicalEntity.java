@@ -9,6 +9,4 @@ package librairie;
  *
  * @author thiti
  */
-public interface GraphicalEntity {
-    
-}
+public interface GraphicalEntity {}

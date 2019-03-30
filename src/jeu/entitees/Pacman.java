@@ -45,7 +45,7 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
         _heigth = heigth;
         _width = width;
         _timeSuperPacman = 0;
-        _entity = new MovableEntity("pacman", x, y, heigth, width, speed);
+        _entity = new MovableEntity(x, y, heigth, width, speed);
         _startX = x;
         _startY = y;
         _entity.setGraphicalEntity(this);
@@ -61,6 +61,12 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
         }
     }
 
+    /**
+     * Verifie si on peut aller dans la direction passer en paramètres
+     * Si oui, on y va
+     * Sinon, on continue dans l'acienne direction
+     * @param direction la nouvelle direstion à tester
+     */
     public void changeDirection(Direction direction){
         if (direction == null) return;
 
@@ -77,6 +83,10 @@ public class Pacman extends Parent implements Observer,GraphicalEntity{
         _entity.translate(x, y);
     }
 
+    /**
+     * Fait deplacer le pacman et gères les colisions avec les autres entitées
+     * @param j le jeu
+     */
     public void deplacer(Jeu j){
         ArrayList<Entity> listEntity = _boardManager.upcommingCollision(_entity);
         if (_timeSuperPacman > 0) {

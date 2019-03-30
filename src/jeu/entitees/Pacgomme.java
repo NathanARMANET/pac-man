@@ -20,7 +20,7 @@ public class Pacgomme extends Parent implements GraphicalEntity{
     }
 
     public Pacgomme(double x, double y, double radius){
-        _entity = new Entity("pacgomme", x, y, radius, radius);
+        _entity = new Entity(x, y, radius, radius);
         _image = new Circle();
         ((Circle) _image).setCenterX(x);
         ((Circle) _image).setCenterY(y);
